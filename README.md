@@ -14,3 +14,5 @@ CIS 550 (Databases &amp; Info Systems) final project at the University of Pennsy
 
 ## Known bugs and how to prevent
 * After calling a db command, quitting the server.js file takes a while with control c. Run server.js
+* Make sure your queries use a backtik and not a quotation mark. 
+* Look at testRoutes as an example for how to write routes
