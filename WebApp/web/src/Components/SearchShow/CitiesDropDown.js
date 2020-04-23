@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import '../../Style/Dropdown.css'
 import axios from 'axios';
 class CitiesDropDown extends Component {
 
@@ -38,7 +39,7 @@ class CitiesDropDown extends Component {
                     this.props.handleSubmit(response);  
 
                 }}> 
-                    <Select value={this.state.multiValue} onChange={this.handleMultiChange} options={this.props.options} isMulti={true} />
+                    <Select className="select" value={this.state.multiValue} onChange={this.handleMultiChange} options={this.props.options} isMulti={true} />
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

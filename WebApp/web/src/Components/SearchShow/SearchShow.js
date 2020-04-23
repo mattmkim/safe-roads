@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import DropDown from './CitiesDropDown'
 import options from './options';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import '../../Style/SearchShow.css'
 import { BarChart } from '@opd/g2plot-react';
 class SearchShow extends Component {
 
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmitQuintile = this.handleSubmitQuintile.bind(this);
         this.state = 
         {
             quintileData: []
         }
     }
 
-    handleSubmit(response) {
+    handleSubmitQuintile(response) {
         console.log(response);
         // changed to data for testing change back to response.data.rows
         var data = [{CITY: 'Fresno', RANK: 54}, {CITY: 'Belsfield', RANK: 10}, {CITY: 'test', RANK: 5}, {CITY: 'test2', RANK: 3}];
@@ -22,10 +26,19 @@ class SearchShow extends Component {
         });
     }
 
-    loadInputForm() {
+    loadInputFormQuintile() {
         return (
             <div>
                 <label>Pick Cities For Quintile</label>
+                <DropDown options={options} handleSubmit={this.handleSubmitQuintile} />
+            </div>
+        )
+    }
+
+    loadInputFormCodes() {
+        return (
+            <div>
+                <label>Pick Cities For Shared Codes</label>
                 <DropDown options={options} handleSubmit={this.handleSubmit} />
             </div>
         )
@@ -53,16 +66,27 @@ class SearchShow extends Component {
     render() {
         return (
             <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xl-" style={{ marginTop: '30px', width: '30%' }}>
-                            {this.loadInputForm()}
-                        </div>
-                        <div className="col">
+                <Container className="quintile-container">
+                    <Row>
+                        <Col className="quintile-col1">
+                            {this.loadInputFormQuintile()}
+                        </Col>
+                        <Col className="quintile-col2">
                             {this.loadBarChart()}
-                        </div>
-                    </div>
-                </div>
+                        </Col>
+                    </Row>
+                </Container>
+                <Container className="codes-container">
+                    <Row>
+                        <Col className="codes-col1">
+                            {this.loadInputFormCodes()}
+                        </Col>
+                        <Col className="codes-col2">
+                            Loading
+                        </Col>
+                    </Row>
+                </Container>
+
 
             </div>
         )
