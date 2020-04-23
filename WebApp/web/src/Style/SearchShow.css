@@ -5,9 +5,9 @@
 }
 
 .quintile-col1 {
-    max-width: 380px;
+    max-width: 380px !important;
 }
 
 .codes-col1 {
-    max-width: 380px;
+    max-width: 380px !important;
 }

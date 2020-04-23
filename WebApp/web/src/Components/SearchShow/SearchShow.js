@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DropDown from './CitiesDropDown'
+import CodesDropDown from './CodesDropDown'
 import options from './options';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -39,7 +40,7 @@ class SearchShow extends Component {
         return (
             <div>
                 <label>Pick Cities For Shared Codes</label>
-                <DropDown options={options} handleSubmit={this.handleSubmit} />
+                <CodesDropDown options={options} handleSubmit={this.handleSubmit} />
             </div>
         )
     }
@@ -80,6 +81,7 @@ class SearchShow extends Component {
                     <Row>
                         <Col className="codes-col1">
                             {this.loadInputFormCodes()}
+
                         </Col>
                         <Col className="codes-col2">
                             Loading
