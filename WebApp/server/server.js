@@ -16,8 +16,6 @@ var routes = require('./routes/testRoutes')(database);
 app.get('/api/test', routes.getTestQuery);
 app.get('/api/testKill', routes.getTestKill);
 
-
-
 const listener = app.listen(5000);
 // incase control c is not working some weird stuff
 process.on('SIGINT', () => {
