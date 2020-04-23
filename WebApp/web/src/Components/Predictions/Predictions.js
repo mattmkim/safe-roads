@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { ScatterChart } from '@opd/g2plot-react';
 import axios from 'axios';
 import { string } from 'prop-types';
+
 var rainDeviation = 0;
 var severityDeviation = 0;
+
 class Predictions extends Component {
     constructor(props) {
     super(props) 

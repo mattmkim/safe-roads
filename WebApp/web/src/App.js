@@ -7,6 +7,7 @@ import Profile from './Components/Profile/Profile'
 import TimeSeries from './Components/Time Series/TimeSeries'
 import Predictions from './Components/Predictions/Predictions'
 import SearchShow from './Components/SearchShow/SearchShow'
+import Features from './Components/Features/Features'
 class App extends Component {
     // change ur respective stuff
     // whoever does login flow should fill this out
@@ -30,6 +31,8 @@ class App extends Component {
             return <Predictions/>
         } else if (currentPage === 'search and show') {
             return <SearchShow/>
+        } else if (currentPage === 'features') {
+            return <Features/>
         }
     }
     render() {
@@ -41,6 +44,7 @@ class App extends Component {
                         <Nav.Link onClick={() => { this.setState({ currentPage: 'profile' }) }}>Profile</Nav.Link>
                         <Nav.Link onClick={() => { this.setState({currentPage: 'search and show'})}}>Search and Show</Nav.Link>
                         <Nav.Link onClick={() => { this.setState({ currentPage: 'time series' }) }}>Time Series Visualization</Nav.Link>
+                        <Nav.Link onClick={() => { this.setState({ currentPage: 'features'}) }}>Features</Nav.Link>
                         <Nav.Link onClick={() => { this.setState({ currentPage: 'predictions' }) }} href="#pricing">Predictions</Nav.Link>
                         <Nav.Item className="ml-auto">
                             <div className ="button-container">
