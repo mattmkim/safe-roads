@@ -12,7 +12,7 @@ module.exports = function(database) {
                 GROUP BY city, TRUNC(time)
             ) Wte ON Acc.city = Wte.city AND TRUNC(Acc.time) = Wte.time
         ) feats
-        GROUP BY feats.City, feats.time;`;
+        GROUP BY feats.City, feats.time`;
         const response = await database.execute(query);
         res.send(response);
     };
@@ -30,7 +30,7 @@ module.exports = function(database) {
                 GROUP BY city, TRUNC(time)
             ) Wte ON Acc.city = Wte.city AND TRUNC(Acc.time) = Wte.time
         ) feats
-        GROUP BY feats.City, feats.time;`;
+        GROUP BY feats.City, feats.time`;
         const response = await database.execute(query);
         res.send(response);
     };
