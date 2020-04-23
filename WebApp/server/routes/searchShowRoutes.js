@@ -28,12 +28,12 @@ module.exports = function(database) {
     response.getSharedCodes = async function (req, res) {
         const cities = req.body.cities;
         var cityString = "(";
-        var numCities = 0;
+        var numCities = req.body.numCodes;
         cities.forEach((value) => {
             numCities += 1;
             cityString += "'" + value.label + "',";
         });
-        cityString = cityString.substring(0, cityString.length - 2);
+        cityString = cityString.substring(0, cityString.length - 1);
         cityString += ")"
         console.log(cityString);
 
@@ -65,7 +65,7 @@ module.exports = function(database) {
         `
         
         const response = await database.execute(query);
-        res.send(repsonse);
+        res.send(response);
     }
 
     return response
