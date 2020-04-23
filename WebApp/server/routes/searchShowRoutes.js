@@ -28,15 +28,14 @@ module.exports = function(database) {
     response.getSharedCodes = async function (req, res) {
         const cities = req.body.cities;
         var cityString = "(";
-        var numCities = req.body.numCodes;
+        var numCities = 0
+        var numCodes = req.body.numCodes;
         cities.forEach((value) => {
-            numCities += 1;
+            numCities = numCities + 1;
             cityString += "'" + value.label + "',";
         });
         cityString = cityString.substring(0, cityString.length - 1);
         cityString += ")"
-        console.log(cityString);
-
 
         const query = `
         SELECT main.city, main.code, main.Rank, main.count2
@@ -58,12 +57,11 @@ module.exports = function(database) {
                             FROM CITY C JOIN ACCIDENT A ON C.city_name = A.city
                             GROUP BY C.city_name, A.tmc) sub) sub2
                     ) sub3
-                WHERE sub3.city in ${cityString} AND sub3.Rank < 8
-                GROUP BY sub3.code) sub4 ON sub4.code = sub2.code WHERE sub2.Rank < 8
+                WHERE sub3.city in ${cityString} AND sub3.Rank < ${numCodes}
+                GROUP BY sub3.code) sub4 ON sub4.code = sub2.code WHERE sub2.Rank <= ${numCodes}
             ) main
-        WHERE main.city in ${cityString} AND main.count2 = ${numCities}
+        WHERE main.city in ${cityString}
         `
-        
         const response = await database.execute(query);
         res.send(response);
     }
