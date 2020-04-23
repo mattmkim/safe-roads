@@ -1,56 +1,93 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
-
+import DropDown from './CitiesDropDown'
+import options from './options';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import '../../Style/SearchShow.css'
+import { BarChart } from '@opd/g2plot-react';
 class SearchShow extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            multiValue: [],
-            options: [
-                {value: 'Portland', label: 'Portland'},
-                {value: 'San Francisco', label: 'San Francisco'},
-                {value: 'Seattle', label: 'Seattle'},
-                {value: 'Los Angeles', label: 'Los Angeles'},
-                {value: 'San Diego', label: 'San Diego'},
-                {value: 'Las Vegas', label: 'Las Vegas'},
-                {value: 'Phoenix', label: 'Phoenix'},
-                {value: 'Albuquerque', label: 'Albuquerque'},
-                {value: 'Denver', label: 'Denver'},
-                {value: 'San Antonio', label: 'San Antonio'},
-                {value: 'Dallas', label: 'Dallas'},
-                {value: 'Houston', label: 'Houston'},
-                {value: 'Kansas City', label: 'Kansas City'},
-                {value: 'Minneapolis', label: 'Minneapolis'},
-                {value: 'Saint Louis', label: 'Saint Louis'},
-                {value: 'Chicago', label: 'Chicago'},
-                {value: 'Nashville', label: 'Nashville'},
-                {value: 'Indianapolis', label: 'Indianapolis'},
-                {value: 'Atlanta', label: 'Atlanta'},
-                {value: 'Detroit', label: 'Detroit'},
-                {value: 'Jacksonville', label: 'Jacksonville'},
-                {value: 'Charlotte', label: 'Charlotte'},
-                {value: 'Miami', label: 'Miami'},
-                {value: 'Pittsburgh', label: 'Pittsburgh'},
-                {value: 'Philadelphia', label: 'Philadelphia'},
-                {value: 'New York', label: 'New York'},
-                {value: 'Boston', label: 'Boston'}
-            ]
+        this.handleSubmitQuintile = this.handleSubmitQuintile.bind(this);
+        this.state = 
+        {
+            quintileData: []
         }
-
-        this.handleMultiChange = this.handleMultiChange.bind(this);
     }
 
-    handleMultiChange(option) {
-        this.setState({
-            multiValue: option
-        })
+    handleSubmitQuintile(response) {
+        console.log(response);
+        // changed to data for testing change back to response.data.rows
+        var data = [{CITY: 'Fresno', RANK: 54}, {CITY: 'Belsfield', RANK: 10}, {CITY: 'test', RANK: 5}, {CITY: 'test2', RANK: 3}];
+        this.setState({quintileData: data}, () => {
+            console.log(this.state);
+        });
     }
 
-    render () {
+    loadInputFormQuintile() {
         return (
             <div>
-                <Select value={this.state.multiValue} onChange={this.handleMultiChange} options={this.state.options} isMulti={true}/>
+                <label>Pick Cities For Quintile</label>
+                <DropDown options={options} handleSubmit={this.handleSubmitQuintile} />
+            </div>
+        )
+    }
+
+    loadInputFormCodes() {
+        return (
+            <div>
+                <label>Pick Cities For Shared Codes</label>
+                <DropDown options={options} handleSubmit={this.handleSubmit} />
+            </div>
+        )
+    }
+
+    loadBarChart() {
+        if (this.state.quintileData.length === 0) {
+            return <div> Loading </div>
+        } else {
+            console.log(this.state);
+            var config = {
+                title: {
+                    visible: true,
+                    text: 'Test for Quintile Data',
+                },
+                data: this.state.quintileData,
+                xField: 'RANK',
+                yField: 'CITY'
+            }
+            console.log(config);
+            return <BarChart {...config} />
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <Container className="quintile-container">
+                    <Row>
+                        <Col className="quintile-col1">
+                            {this.loadInputFormQuintile()}
+                        </Col>
+                        <Col className="quintile-col2">
+                            {this.loadBarChart()}
+                        </Col>
+                    </Row>
+                </Container>
+                <Container className="codes-container">
+                    <Row>
+                        <Col className="codes-col1">
+                            {this.loadInputFormCodes()}
+                        </Col>
+                        <Col className="codes-col2">
+                            Loading
+                        </Col>
+                    </Row>
+                </Container>
+
+
             </div>
         )
     }

@@ -1,10 +1,14 @@
 # Safe-Roads
 CIS 550 (Databases &amp; Info Systems) final project at the University of Pennsylvania that features a website with functionalities for querying and visualizing U.S. accident data with associated weather factors.
 
+## Installation
+* Install oracle and sqlplus: https://vanwollingen.nl/install-oracle-instant-client-and-sqlplus-using-homebrew-a233ce224bf
+* If can't figure out oracle home path using homebrew: https://tomeuwork.wordpress.com/2014/05/12/how-to-install-oracle-sqlplus-and-oracle-client-in-mac-os/
+
 ## Instructions for Running the Web App
 * Step 1: Navigate to the Webapp folder 
-* Step 2: Navigate to the web folder and run npm start
-* Step 3: Navigate to the server folder and run node server.js
+* Step 2: Navigate to the web folder and run `npm install` and `npm start`
+* Step 3: Navigate to the server folder and run `npm install` and `node server.js`
 
 ## Instructions for how to run your queries. 
 * Step 1: Navigate to the corresponding routes folder and make a new routes.js file. 
