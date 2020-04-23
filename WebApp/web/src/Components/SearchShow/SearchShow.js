@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import '../../Style/SearchShow.css'
 import { BarChart } from '@opd/g2plot-react';
+
 class SearchShow extends Component {
 
     constructor(props) {
@@ -14,7 +15,9 @@ class SearchShow extends Component {
         this.handleSubmitQuintile = this.handleSubmitQuintile.bind(this);
         this.state = 
         {
-            quintileData: []
+            quintileData: [],
+            numCodes: 0,
+            codesCities: []  
         }
     }
 
@@ -36,11 +39,16 @@ class SearchShow extends Component {
         )
     }
 
+
+    handleSubmitCodes(response) {
+        console.log(response);
+    }
+
     loadInputFormCodes() {
         return (
             <div>
                 <label>Pick Cities For Shared Codes</label>
-                <CodesDropDown options={options} handleSubmit={this.handleSubmit} />
+                <CodesDropDown options={options} handleSubmit={this.handleSubmitCodes}/>
             </div>
         )
     }

@@ -36,14 +36,13 @@ class CitiesDropDown extends Component {
             <div>
                 <Form onSubmit = {async (e) => {
                     e.preventDefault();
-                    // commented out for testing
-                    //const param = {
-                    //    cities: this.state.multiValue
-                    //}
-                    // const param = {cities: [{label: 'Fresno'}, {label: 'Belfield'}]}
-                    // const response = await axios.post('/api/getQuintilesForCity', param);
-                    // console.log("done" + response);
-                    const response = null;
+
+                    const obj = {
+                        cities: this.state.multiValue,
+                        numCodes: this.state.numCodes
+                    }
+
+                    const response = await axios.post('/api/getSharedCodes', obj)
                     this.props.handleSubmit(response);  
 
                 }}> 
