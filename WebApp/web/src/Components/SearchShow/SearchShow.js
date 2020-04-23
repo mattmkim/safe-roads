@@ -13,11 +13,12 @@ class SearchShow extends Component {
     constructor(props) {
         super(props);
         this.handleSubmitQuintile = this.handleSubmitQuintile.bind(this);
+        this.handleSubmitCodes = this.handleSubmitCodes.bind(this);
         this.state = 
         {
             quintileData: [],
-            numCodes: 0,
-            codesCities: []  
+            codesData: []
+
         }
     }
 
@@ -39,9 +40,13 @@ class SearchShow extends Component {
         )
     }
 
-
     handleSubmitCodes(response) {
-        console.log(response);
+        console.log(response.data.rows);
+
+        var data = response.data.rows;
+        this.setState({
+            codesData: data
+        })
     }
 
     loadInputFormCodes() {
