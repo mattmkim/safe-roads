@@ -12,10 +12,12 @@ app.use(bodyParser.json());
 // various routes files for various call back functions 
 var routes = require('./routes/testRoutes')(database);
 var predictionRoutes = require('./routes/predictionRoutes')(database);
+var searchShowRoutes = require('./routes/searchShowRoutes')(database);
 // route handling
 app.get('/api/test', routes.getTestQuery);
 app.get('/api/testKill', routes.getTestKill);
 app.get('/api/getWeatherAccidentDeviations', predictionRoutes.getWeatherAccidentDeviations);
+app.post('/api/getQuintilesForCity', searchShowRoutes.getQuintileForCity);
 
 
 const listener = app.listen(5000);
