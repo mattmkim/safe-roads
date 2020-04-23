@@ -24,6 +24,5 @@ export default [
     {value: 'Miami', label: 'Miami'},
     {value: 'Pittsburgh', label: 'Pittsburgh'},
     {value: 'Philadelphia', label: 'Philadelphia'},
-    {value: 'New York', label: 'New York'},
-    {value: 'Boston', label: 'Boston'}
+    {value: 'New York', label: 'New York'}
 ];
