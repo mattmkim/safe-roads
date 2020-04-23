@@ -4,7 +4,7 @@ module.exports = function(database) {
     // query for obtaining predictions
     response.getCityQuery = async function(req, res) {
         let query = 
-        `SELECT DISTINCT(city)
+        `SELECT DISTINCT city
         FROM Weather
         ORDER BY city;`;
         const response = await database.execute(query);

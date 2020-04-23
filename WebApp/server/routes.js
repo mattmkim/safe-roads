@@ -10,7 +10,9 @@ return connection
 }
 
 const connection = runRoutes();
-require('./routes/testRoutes')(app, connection);
+require('./routes/testRoutes.js')(app, connection);
+require('./routes/cityRoutes.js')(app, connection);
+require('./routes/predictionRoutes.js')(app, connection);
 // const database = require('./oracle-db');
 // try {
 //     console.log('Initializing database module');

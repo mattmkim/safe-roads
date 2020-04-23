@@ -33,6 +33,37 @@ module.exports = function(database) {
         GROUP BY feats.City, feats.time;`;
     };
 
+    response.getWeatherAccidentDeviations = async function(req, res) {
+        console.log("called weather accident deviations. I.e query number 1 ");
+        let query = `WITH severity (city, deviation) AS (SELECT acc_av.city as city, acc_av.average as deviation
+            FROM (
+            SELECT city, AVG(severity) as average 
+            FROM Accident a
+            GROUP BY city 
+            ) acc_av
+            ), 
+            rain (city, deviation) AS (
+            SELECT city_av.city as city, city_av.average as deviation
+            FROM (
+            SELECT city, AVG(humidity) as average 
+            FROM Weather
+            GROUP BY city
+            ) city_av), 
+            severityAverage(average) AS (SELECT AVG(severity) as average
+              FROM Accident),
+            humidityAverage(average) AS (SELECT AVG(humidity) as average
+                 FROM Weather) 
+            SELECT rain.city AS city, rain.deviation - humidityAverage.average AS rainDeviation, severity.deviation - severityAverage.average AS serverityDeviation
+            FROM rain
+            JOIN severity
+            ON rain.city = severity.city
+            CROSS JOIN severityAverage
+            CROSS JOIN humidityAverage        
+            `
+        const response = await database.execute(query);
+        res.send(response)
+    }
+
     response.getPredictionKill = async function(req, res) {
         console.log("killing");
         const response = await database.close();
