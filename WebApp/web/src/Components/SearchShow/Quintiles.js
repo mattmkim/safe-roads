@@ -21,7 +21,8 @@ class Quintiles extends Component {
     handleSubmitQuintile(response) {
         console.log(response);
         // changed to data for testing change back to response.data.rows
-        var data = [{CITY: 'Fresno', RANK: 54}, {CITY: 'Belsfield', RANK: 10}, {CITY: 'test', RANK: 5}, {CITY: 'test2', RANK: 3}];
+        //var data = [{CITY: 'Fresno', RANK: 54}, {CITY: 'Belsfield', RANK: 10}, {CITY: 'test', RANK: 5}, {CITY: 'test2', RANK: 3}];
+        var data = response.data.rows;
         this.setState({quintileData: data}, () => {
             console.log(this.state);
         });
