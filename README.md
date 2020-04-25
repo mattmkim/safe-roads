@@ -6,6 +6,11 @@ CIS 550 (Databases &amp; Info Systems) final project at the University of Pennsy
 * Install sqlldr
 * If can't figure out oracle home path using homebrew: https://tomeuwork.wordpress.com/2014/05/12/how-to-install-oracle-sqlplus-and-oracle-client-in-mac-os/
 * Or: https://oracle.github.io/odpi/doc/installation.html#macos and move unzipped folder into `/opt/oracle`
+Add paths (locally or to zshrc/bashrc): 
+`export ORACLE_HOME=/opt/oracle/instantclient_19_3`
+`export DYLD_LIBRARY_PATH=$ORACLE_HOME`
+`export LD_LIBRARY_PATH=$ORACLE_HOME`
+`export PATH=$ORACLE_HOME:$PATH`
 
 ## Instructions for Running the Web App
 * Step 1: Navigate to the Webapp folder 

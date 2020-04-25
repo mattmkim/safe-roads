@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Select from 'react-select';
 import axios from 'axios';
-import { ScatterChart } from '@opd/g2plot-react';
+import { LineChart } from '@opd/g2plot-react';
 import TimeSeriesRow from './TimeSeriesRow';
 import './TimeSeries.css';
 
@@ -11,10 +11,12 @@ class TimeSeries extends Component {
         this.state = {
             city: [],
             cities: [],
-            features: []
+            features: [],
+            data: []
         }
 
         this.showFeatures = this.showFeatures.bind(this);
+        this.loadTimeSeries = this.loadTimeSeries.bind(this);
     }
 
     async componentDidMount() {
@@ -38,9 +40,47 @@ class TimeSeries extends Component {
         if (response.data) {
             var featureList = response.data.rows;
             let featureDivs = featureList.map((feature) => <TimeSeriesRow year={feature.YEAR} month={feature.MONTH} id={feature.ID} time={feature.TIME} cum_severity={feature.CUM_SEVERITY} cum_accidents={feature.CUM_ACCIDENTS}/>);
+            let datarows = featureList.map((row) => { return { year: row.YEAR, month: row.MONTH, time: row.TIME, cum_severity: row.CUM_SEVERITY, cum_accidents: row.CUM_ACCIDENTS } });
             this.setState({
-                features: featureDivs
+                features: featureDivs,
+                data: datarows
             });
+        }
+    }
+
+    loadTimeSeries() {
+        if (this.state.data.length === 0) {
+            return <div> Loading </div>
+        } else {
+            var config = {
+                height: 400,
+                title: {
+                    visible: true,
+                    text: 'Time Series Graph',
+                },
+                description: {
+                    visible: true,
+                    text: 'Cumulative Average Severity and Number of Accidents Over Time',
+                },
+                padding: 'auto',
+                forceFit: true,
+                xField: 'time',
+                yField: 'cum_accidents',
+                label: {
+                    visible: true,
+                    type: 'point',
+                },
+                point: {
+                    visible: true,
+                    size: 5,
+                },
+                xAxis: {
+                    tickCount: 10,
+                },
+                data: this.state.data,
+            }
+            console.log(config);
+            return <LineChart {...config} />
         }
     }
 
@@ -57,6 +97,8 @@ class TimeSeries extends Component {
                         <div className="h5">Current city: {this.state.city}</div>
                     </div>
                 </div>
+                <br></br>
+                {this.loadTimeSeries()}
                 <br></br>
                 <div className="time-series">
                     <div className="time-series-container">
