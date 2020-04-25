@@ -39,7 +39,7 @@ class App extends Component {
         return <div>
             <div class="wrapper">
                 <Navbar className="navbar" variant="dark">
-                    <Navbar.Brand className="navbar-title">Penn Safety</Navbar.Brand>
+                    <Navbar.Brand className="navbar-title">Safe-Roads</Navbar.Brand>
                     <Nav className="container-fluid">
                         <Nav.Link onClick={() => { this.setState({ currentPage: 'profile' }) }}>Profile</Nav.Link>
                         <Nav.Link onClick={() => { this.setState({currentPage: 'search and show'})}}>Search and Show</Nav.Link>
