@@ -9,10 +9,10 @@
     flex: 1 0 5%;
   }
   
-  .time-series-header .header, .time-series-row .avg_severity {
+  .time-series-header .header, .time-series-row .id, .time-series-row .time, .time-series-row .cum_severity {
     flex: 1 0 12%;
   }
   
-  .time-series-header .header-sm, .time-series-row .num_accidents {
+  .time-series-header .header-sm, .time-series-row .cum_accidents {
     flex: 1 0 6%;
   }
