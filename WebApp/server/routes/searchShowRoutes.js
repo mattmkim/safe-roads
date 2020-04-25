@@ -57,7 +57,7 @@ module.exports = function(database) {
                             FROM CITY C JOIN ACCIDENT A ON C.city_name = A.city
                             GROUP BY C.city_name, A.tmc) sub) sub2
                     ) sub3
-                WHERE sub3.city in ${cityString} AND sub3.Rank < ${numCodes}
+                WHERE sub3.city in ${cityString} AND sub3.Rank <= ${numCodes}
                 GROUP BY sub3.code) sub4 ON sub4.code = sub2.code WHERE sub2.Rank <= ${numCodes}
             ) main
         WHERE main.city in ${cityString}
