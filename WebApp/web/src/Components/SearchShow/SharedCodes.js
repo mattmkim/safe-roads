@@ -42,11 +42,17 @@ class SharedCodes extends Component {
         } else {
             const newData = [];
             const seenCodes = [];
+            const data = []
+
+            for (var i; i < this.state.codesData.length; i++) {
+                
+            }
             for (var i = 0; i < this.state.codesData.length; i++) {
+                var city = this.state.codesData[i].CITY;
+                var rank = this.state.codesData[i].RANK;
                 var type = this.state.codesData[i].CODE;
-                console.log(type);
                 var value = this.state.codesData[i].COUNT2;
-                console.log(value);
+                data.push(<div key={i}>city: {city} rank: {rank} code: {type} frequency: {value}</div>)
                 if (seenCodes.includes(type)) {
                     continue;
                 } else {
@@ -67,13 +73,25 @@ class SharedCodes extends Component {
 
             }
 
-            console.log(config);
+            return ( 
+                <div>
+                    <RoseChart {...config} /> 
+                    <div>
+                        {data}
+                    </div>
+                </div>
 
-            return <RoseChart {...config} />
+            )
         }
     }
 
     render() {
+        const data = []
+
+        for (var i; i < this.state.codesData.length; i++) {
+            data.push(<div key={i}>city: {this.state.codesData[i].CITY} rank: {this.state.codesData[i].RANK} code: {this.states.codesData[i].CODE}</div>)
+        }
+
         return (
             <div>
                 <Container className="codes-container">
