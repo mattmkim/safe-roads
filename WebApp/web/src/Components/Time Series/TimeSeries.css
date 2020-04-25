@@ -1,0 +1,18 @@
+.time-series-container .time-series-header, .time-series-results-container .time-series-row {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    height: 40px;
+  }
+  
+  .time-series-row .year, .time-series-row .month, .time-series-header .header-lg {
+    flex: 1 0 5%;
+  }
+  
+  .time-series-header .header, .time-series-row .avg_severity {
+    flex: 1 0 12%;
+  }
+  
+  .time-series-header .header-sm, .time-series-row .num_accidents {
+    flex: 1 0 6%;
+  }

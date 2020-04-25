@@ -14,6 +14,7 @@ var routes = require('./routes/testRoutes.js')(database);
 var routes_city = require('./routes/cityRoutes.js')(database);
 var predictionRoutes = require('./routes/predictionRoutes')(database);
 var searchShowRoutes = require('./routes/searchShowRoutes')(database);
+var timeSeriesRoutes = require('./routes/timeSeriesRoutes')(database);
 
 // route handling
 app.get('/api/test', routes.getTestQuery);
@@ -26,6 +27,9 @@ app.get('/api/predictionKill', predictionRoutes.getPredictionKill);
 app.get('/api/getWeatherAccidentDeviations', predictionRoutes.getWeatherAccidentDeviations);
 app.post('/api/getQuintilesForCity', searchShowRoutes.getQuintileForCity);
 app.post('/api/getSharedCodes', searchShowRoutes.getSharedCodes);
+app.get('/api/timeSeries', timeSeriesRoutes.getTimeSeriesQuery);
+app.get('/api/timeSeries/:city', timeSeriesRoutes.getTimeSeriesQueryCity);
+app.get('/api/timeSeriesKill', timeSeriesRoutes.getTimeSeriesKill);
 
 const listener = app.listen(5000);
 // incase control c is not working some weird stuff
