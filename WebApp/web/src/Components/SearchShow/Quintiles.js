@@ -11,19 +11,18 @@ class Quintiles extends Component {
     constructor(props) {
         super(props);
         this.handleSubmitQuintile = this.handleSubmitQuintile.bind(this);
-        this.state = 
-        {
-            quintileData: [],
+        this.state =
+            {
+                quintileData: [],
 
-        }
+            }
     }
 
     handleSubmitQuintile(response) {
-        console.log(response);
         // changed to data for testing change back to response.data.rows
         //var data = [{CITY: 'Fresno', RANK: 54}, {CITY: 'Belsfield', RANK: 10}, {CITY: 'test', RANK: 5}, {CITY: 'test2', RANK: 3}];
         var data = response.data.rows;
-        this.setState({quintileData: data}, () => {
+        this.setState({ quintileData: data }, () => {
             console.log(this.state);
         });
     }
@@ -41,7 +40,6 @@ class Quintiles extends Component {
         if (this.state.quintileData.length === 0) {
             return <div> Loading </div>
         } else {
-            console.log(this.state);
             var config = {
                 title: {
                     visible: true,
@@ -68,7 +66,7 @@ class Quintiles extends Component {
                         </Col>
                     </Row>
                 </Container>
-            </div> 
+            </div>
         )
     }
 }
