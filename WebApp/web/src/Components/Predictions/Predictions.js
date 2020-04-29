@@ -105,12 +105,12 @@ class Predictions extends Component {
     render() {
         return (
             <div>
-                <div className = "container">
-                    <div className = "row">
-                        <div className = "col-xl-" style = {{marginTop: '30px',width: '30%'}}>
+                <div className = "container" style = {{paddingLeft: "15px"}}>
+                    <div className = "row" style = {{width: "100%"}}>
+                        <div className = "col" style = {{width: '30%'}}>
                         {this.loadInputForm()}
                         </div>
-                        <div className = "col">
+                        <div className = "col" style = {{width: '70%'}}>
                         {this.loadScatterPlot()}
                         </div>
                     </div>

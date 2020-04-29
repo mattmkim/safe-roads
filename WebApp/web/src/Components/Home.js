@@ -3,11 +3,11 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
 import '../Style/navbar.css'
-import Profile from './Profile/Profile'
-import TimeSeries from './Time Series/TimeSeries'
-import Predictions from './Predictions/Predictions'
-import SearchShow from './SearchShow/SearchShow'
-import Features from './Features/Features'
+import Profile from '../Components/Profile/Profile'
+import TimeSeries from '../Components/Time Series/TimeSeries'
+import PredictionsMain from '../Components/Predictions/PredictionsMain'
+import SearchShow from '../Components/SearchShow/SearchShow'
+import Features from '../Components/Features/Features'
 class App extends Component {
     // change ur respective stuff
     // whoever does login flow should fill this out
@@ -19,6 +19,9 @@ class App extends Component {
     }
     logout() {
         console.log("logout")
+        this.props.history.push({
+            pathname: '/'
+        })
     }
 
     renderBody() {
@@ -28,7 +31,7 @@ class App extends Component {
         } else if (currentPage === 'time series') {
             return <TimeSeries />
         } else if (currentPage === 'predictions') {
-            return <Predictions/>
+            return <PredictionsMain/>
         } else if (currentPage === 'search and show') {
             return <SearchShow/>
         } else if (currentPage === 'features') {
@@ -37,9 +40,9 @@ class App extends Component {
     }
     render() {
         return <div>
-            <div class="wrapper">
+            <div className="wrapper">
                 <Navbar className="navbar" variant="dark">
-                    <Navbar.Brand className="navbar-title">Safe Roads</Navbar.Brand>
+                    <Navbar.Brand className="navbar-title">Safe-Roads</Navbar.Brand>
                     <Nav className="container-fluid">
                         <Nav.Link onClick={() => { this.setState({ currentPage: 'profile' }) }}>Profile</Nav.Link>
                         <Nav.Link onClick={() => { this.setState({currentPage: 'search and show'})}}>Search and Show</Nav.Link>
@@ -54,7 +57,9 @@ class App extends Component {
                     </Nav>
                 </Navbar>
             </div>
+            <div>
             {this.renderBody()}
+            </div>
         </div>
     }
 }
