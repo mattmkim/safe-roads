@@ -122,7 +122,7 @@ class Features extends Component {
                 },
                 description: {
                     visible: true,
-                    text: 'Stacked area chart for understanding city-specific accident/weather features at one glance'
+                    text: 'Grouped bar chart for understanding city-specific accident/weather features at one glance'
                 },
                 forceFit: true,
                 xField: 'date',
@@ -172,7 +172,7 @@ class Features extends Component {
                             <div className="header"><strong>Accident Severity(1-4)</strong></div>
                             <div className="header"><strong>Temperature (Celsius)</strong></div>
                             <div className="header"><strong>Temperature Range</strong></div>
-                            <div className="header-sm"><strong>Humidity</strong></div>
+                            <div className="header-sm"><strong>Humidity (%)</strong></div>
                             <div className="header-sm"><strong>Pressure (kPa)</strong></div>
                             <div className="header-sm"><strong>Wind Speed (m/s)</strong></div>
                         </div>
