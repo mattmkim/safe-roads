@@ -38,27 +38,25 @@ module.exports = function(database) {
         cityString += ")"
 
         const query = `
-        SELECT main.city, main.code, main.Rank, main.count2
-        FROM
-            (SELECT sub2.city, sub2.code, sub2.count, sub2.Rank AS Rank, sub4.count2
-            FROM 
-                (SELECT sub.city, sub.code, sub.count, ROW_NUMBER() OVER (PARTITION BY city ORDER BY sub.count DESC) AS Rank
+        WITH ranktable AS (
+            SELECT sub.city, sub.code, sub.count, ROW_NUMBER() OVER (PARTITION BY city ORDER BY sub.count DESC) AS Rank
                 FROM 
                     (SELECT C.city_name AS city, A.tmc AS code, COUNT(A.tmc) as count
                     FROM CITY C JOIN ACCIDENT A ON C.city_name = A.city
-                    GROUP BY C.city_name, A.tmc) sub) sub2
+                    GROUP BY C.city_name, A.tmc) sub
+        )
+
+        SELECT main.city, main.code, main.Rank, main.count2
+        FROM
+            (SELECT ranktable.city, ranktable.code, ranktable.count, ranktable.Rank AS Rank, sub4.count2
+            FROM ranktable
             JOIN (SELECT sub3.code, COUNT(sub3.city) AS count2
                 FROM
-                    (SELECT sub2.city, sub2.code, sub2.count, sub2.Rank AS Rank
-                    FROM 
-                        (SELECT sub.city, sub.code, sub.count, ROW_NUMBER() OVER (PARTITION BY city ORDER BY sub.count DESC) AS Rank
-                        FROM 
-                            (SELECT C.city_name AS city, A.tmc AS code, COUNT(A.tmc) as count
-                            FROM CITY C JOIN ACCIDENT A ON C.city_name = A.city
-                            GROUP BY C.city_name, A.tmc) sub) sub2
+                    (SELECT ranktable.city, ranktable.code, ranktable.count, ranktable.Rank AS Rank
+                    FROM ranktable
                     ) sub3
                 WHERE sub3.city in ${cityString} AND sub3.Rank <= ${numCodes}
-                GROUP BY sub3.code) sub4 ON sub4.code = sub2.code WHERE sub2.Rank <= ${numCodes}
+                GROUP BY sub3.code) sub4 ON sub4.code = ranktable.code WHERE ranktable.Rank <= ${numCodes}
             ) main
         WHERE main.city in ${cityString}
         `
