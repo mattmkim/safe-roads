@@ -7,7 +7,7 @@
 
 .stats-container .feature {
   border: 2px solid black;
-  flex: 1 0 20%;
+  flex: 1 0 15%;
   margin: 3px 0;
   line-height: 30px;
   text-align: center;
@@ -21,16 +21,8 @@
   border-color: black;
 }
 
-.stats-container .feature:active {
-  background-color: rgb(108, 173, 223);
-  color: rgb(108, 173, 223);
-  border-color: black;
-}
-
 .stats-container .feature:focus {
   background-color: rgb(108, 173, 223);
-  color: rgb(108, 173, 223);
-  border-color: black;
 }
 
 .features-container .features-header, .results-container .feature {

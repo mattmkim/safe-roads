@@ -26,13 +26,13 @@ class Features extends Component {
         const response = await axios.get('/api/city');
         if (response.data) {
             var cityList = response.data.rows;
-            let statList = ['temp_avg', 'temp_rng', 'humidity', 'pressure', 'wspeed'];
+            let statList = ['severity', 'temp_avg', 'temp_rng', 'humidity', 'pressure', 'wspeed'];
             let cityDivs = cityList.map((data) => {return {value: `${data.CITY}`, label: `${data.CITY}`}});
             let statDivs = statList.map((stat_) => <FeatureButton id={"button-" + stat_} onClick={() => this.setState({stat: stat_})} feature={stat_} />)
             this.setState({
                 city: 'Philadelphia',
                 cities: cityDivs,
-                stat: 'temp_avg',
+                stat: 'severity',
                 stats: statDivs
             });
             this.showFeatures(this.state.city);
@@ -62,7 +62,9 @@ class Features extends Component {
             return <div>Loading Visualization...</div>
         } else {
             let input_color = '';
-            if (input_feat === 'temp_avg'){
+            if (input_feat === 'severity') {
+                input_color = 'black';
+            } else if (input_feat === 'temp_avg'){
                 input_color = 'red';
             } else if (input_feat === 'temp_rng') {
                 input_color = 'orange';
@@ -118,7 +120,7 @@ class Features extends Component {
                 <br></br>
                 {this.loadVisualization(this.state.city, this.state.stat)}
                 <br></br>
-                <div className="h5">Current city: {this.state.city}</div>
+                <div className="h5">Detailed Statistics for {this.state.city}</div>
                 <div className="features">
                     <div className="features-container">
                         <div className="features-header">
