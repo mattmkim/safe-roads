@@ -1,0 +1,46 @@
+.container {
+    height: 90vh;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.penn-safety {
+    text-align: center;
+    font-size: 50px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card {
+    padding: 20px;
+    width: 400px;
+
+}
+
+.sign-in {
+    text-align: center;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-container {
+    margin-top: 30px;
+    text-align: center;;
+}
+
+
+
+
+
+

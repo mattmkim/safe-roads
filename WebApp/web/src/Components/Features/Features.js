@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Select from 'react-select';
-import './Features.css';
+import '../../Style/Features.css'
 import { ScatterChart } from '@opd/g2plot-react';
 import axios from 'axios';
 import FeaturesRow from './FeaturesRow';
