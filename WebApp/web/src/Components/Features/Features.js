@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import Select from 'react-select';
 import './Features.css';
-import { GroupedColumnChart } from '@opd/g2plot-react';
+import { ColumnChart } from '@opd/g2plot-react';
 import axios from 'axios';
+import FeatureButton from './FeatureButton';
 import FeaturesRow from './FeaturesRow';
 
 class Features extends Component {
@@ -12,7 +13,9 @@ class Features extends Component {
             city: [],
             cities: [],
             features: [],
-            storage: []
+            storage: [],
+            stat: [],
+            stats: []
         }
 
         this.showFeatures = this.showFeatures.bind(this);
@@ -23,10 +26,14 @@ class Features extends Component {
         const response = await axios.get('/api/city');
         if (response.data) {
             var cityList = response.data.rows;
+            let statList = ['temp_avg', 'temp_rng', 'humidity', 'pressure', 'wspeed'];
             let cityDivs = cityList.map((data) => {return {value: `${data.CITY}`, label: `${data.CITY}`}});
+            let statDivs = statList.map((stat_) => <FeatureButton id={"button-" + stat_} onClick={() => this.setState({stat: stat_})} feature={stat_} />)
             this.setState({
                 city: 'Philadelphia',
-                cities: cityDivs
+                cities: cityDivs,
+                stat: 'temp_avg',
+                stats: statDivs
             });
             this.showFeatures(this.state.city);
         }
@@ -82,11 +89,10 @@ class Features extends Component {
                 label: {
                     visible: true,
                 },
-                groupField: 'type',
                 data: this.state.storage,
                 color: input_color
             }
-            return <GroupedColumnChart {...config} />
+            return <ColumnChart {...config} />
         }
     }
 
@@ -100,12 +106,19 @@ class Features extends Component {
                         <div className="cities-container">
                             <Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false}/>
                         </div>
-                        <div className="h5">Current city: {this.state.city}</div>
                     </div>
                 </div>
                 <br></br>
-                {this.loadVisualization(this.state.city, 'temp_avg')}
+                <div>
+                    <div className="h6">Please choose a weather feature to observe.</div>
+                </div>
+                <div className="stats-container">
+                    {this.state.stats}
+                </div>
                 <br></br>
+                {this.loadVisualization(this.state.city, this.state.stat)}
+                <br></br>
+                <div className="h5">Current city: {this.state.city}</div>
                 <div className="features">
                     <div className="features-container">
                         <div className="features-header">
