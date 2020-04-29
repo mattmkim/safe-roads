@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { ScatterChart } from '@opd/g2plot-react';
 import axios from 'axios';
-import { string } from 'prop-types';
 
 var rainDeviation = 0;
 var severityDeviation = 0;
@@ -74,12 +73,12 @@ class Deviations extends Component {
                 data: this.state.data,
             }
             console.log(config);
-            return <ScatterChart {...config} />
+            return <div style = {{width: "100%"}}><ScatterChart {...config} /> </div> 
         }
     }
     // this doesn't actually work lmao
     loadInputForm() {
-        return <div>
+        return <div style = {{marginTop: "20px"}}>
             <form onSubmit={(e) => {
                 e.preventDefault();
                 const val1 = parseFloat(rainDeviation)
@@ -88,11 +87,11 @@ class Deviations extends Component {
             }}>
                 <div className="form-group">
                     <label>Deviation of Severity</label>
-                    <input className="form-control" value={this.state.severityDeviation} onChange={(e) => { severityDeviation = e.target.value }} aria-describedby="emailHelp" placeholder="Enter deviation for accident severity" />
+                    <input type = "number" step = "any" required = "true" max = "1" min = "0" className="form-control" value={this.state.severityDeviation} onChange={(e) => { severityDeviation = e.target.value }} aria-describedby="emailHelp" placeholder="Enter deviation for accident severity" />
                 </div>
                 <div className="form-group">
                     <label>Deviation of Rain</label>
-                    <input className="form-control" value={this.state.rainDeviation} onChange={(e) => { rainDeviation = e.target.value }} placeholder='Enter Deviation for amount rain' />
+                    <input type = "number" step = "any" required = "true" max = "1" min = "0" className="form-control" value={this.state.rainDeviation} onChange={(e) => { rainDeviation = e.target.value }} placeholder='Enter Deviation for amount rain' />
                 </div>
                 <div className="form-group form-check">
                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
@@ -104,12 +103,13 @@ class Deviations extends Component {
     }
     render() {
         return (
-            <div>
-                <div className="container" style={{ paddingLeft: "15px" }}>
-                    {this.loadInputForm()}
-                    {this.loadScatterPlot()}
-
-                </div>
+            <div style = {{height: '100%', width: '85%'}}>
+                <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                Accident frequency and amount of rain are correlated. This feature allows you to input hypothetical weather conditions for a city and compare it to the real ones in our data set
+                <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                The input must take a form of a decimal between 0 and 100 for each attribute: this will represent the percent deviation from the norm.
+                {this.loadInputForm()}
+                {this.loadScatterPlot()}
             </div>
         )
     }

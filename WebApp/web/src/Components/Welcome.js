@@ -81,7 +81,7 @@ class Welcome extends Component {
                 <div>
                  {alert}
                 </div>
-                <div class="container">
+                <div class="container-welcome">
                     <Container fluid="sm">
                         <h1 class="penn-safety"> Safe Roads </h1>
                         <div class="card-container">

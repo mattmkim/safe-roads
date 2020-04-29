@@ -110,7 +110,7 @@ class Signup extends Component {
                 <div>
                 {alert}
                 </div>
-                <div class="container">
+                <div class="container-signup">
                     <Container fluid="lg">
                         <h1 class="sign-in"> Sign Up</h1>
                         <div class="card-container">
