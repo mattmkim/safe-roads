@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import '../../Style/SearchShow.css'
-import SharedCodes from './SharedCodes';
-import Quintiles from './Quintiles';
-class SearchShow extends Component {
+import React, { Component } from 'react'
+import Predictions from './Predictions';
+import TimeSeriesProjections from './Projections'
+import './Predictions.css'
+class PredictionsMain extends Component {
     state = {
-        content: 'quintiles'
+        content: 'deviations'
     }
     renderContent() {
-        if(this.state.content === "quintiles") {
-           return <Quintiles/>
+        if(this.state.content === "deviations") {
+           return <Predictions/>
         } else {
-            return <SharedCodes/>
+            return <TimeSeriesProjections/>
         }
     }
     render() {
@@ -18,17 +18,18 @@ class SearchShow extends Component {
             <div>
                 <div className="vertical-nav bg-light" id="sidebar" style = {{float: "left"}}>
                     <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+
                     <ul className="nav flex-column bg-light mb-0">
                         <li className="nav-item">
-                            <a onClick = {() => {this.setState({content: 'quintiles'})}}className="nav-link text-dark font-italic bg-light">
+                            <a onClick = {() => {this.setState({content: 'deviations'})}}className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                                Quintiles
+                                Deviations
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a onClick = {() => {this.setState({content: 'SharedCodes'})}} className="nav-link text-dark font-italic bg-light">
+                            <a onClick = {() => {this.setState({content: 'projection'})}} className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                                SharedCodes
+                                Projections
                             </a>
                         </li>
                     </ul>
@@ -43,4 +44,4 @@ class SearchShow extends Component {
     }
 }
 
-export default SearchShow
+export default PredictionsMain;
