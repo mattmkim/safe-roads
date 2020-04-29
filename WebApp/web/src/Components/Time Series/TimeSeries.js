@@ -3,7 +3,7 @@ import Select from 'react-select';
 import axios from 'axios';
 import { LineChart } from '@opd/g2plot-react';
 import TimeSeriesRow from './TimeSeriesRow';
-import './TimeSeries.css';
+import '../../Style/TimeSeries.css';
 
 class TimeSeries extends Component {
     constructor(props) {
