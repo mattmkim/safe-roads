@@ -74,10 +74,25 @@ var routes = function(User) {
         })
     }
 
+    var updateCity = function(req, res) {
+        var email = req.body.email;
+        var city = req.body.favcity;
+
+        User.update({email: email}, {favcity: city}, function(err, response) {
+            if (err) {
+                console.log(err);
+                res.send("error");
+            } else {
+                res.send("success");
+            }
+        })
+    }
+
     return {
         check_login: checkLogin,
         signup: signup,
-        delete_profile: deleteProfile
+        delete_profile: deleteProfile,
+        update_city: updateCity
     }
 }
 

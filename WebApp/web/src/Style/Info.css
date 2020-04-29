@@ -20,3 +20,10 @@
     margin-right: 4px;
 }
 
+.form-wrapper {
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

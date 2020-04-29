@@ -60,7 +60,7 @@ class Signup extends Component {
             console.log("signup sequence");
 
             var objCheckLogin = {email: this.state.email, password: this.state.password};
-            var objSignup = {firstname: this.state.firstname, lastname: this.state.lastname, email: this.state.email, password: this.state.password, username: this.state.username, university: this.state.university};
+            var objSignup = {firstname: this.state.firstname, lastname: this.state.lastname, email: this.state.email, password: this.state.password, favcity: this.state.favcity};
             
             Auth.signup(objSignup, (result) => {
                 if (result === "user exists") {

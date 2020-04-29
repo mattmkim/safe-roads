@@ -31,6 +31,7 @@ var timeSeriesRoutes = require('./routes/timeSeriesRoutes')(database);
 app.post('/api/checklogin/', authRoutes.check_login);
 app.post('/api/signup/', authRoutes.signup);
 app.post('/api/deleteprofile/', authRoutes.delete_profile);
+app.post('/api/updatecity/', authRoutes.update_city);
 app.get('/api/test', routes.getTestQuery);
 app.get('/api/testKill', routes.getTestKill);
 app.get('/api/city', routes_city.getCityQuery);
