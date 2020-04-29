@@ -38,7 +38,7 @@ class Quintiles extends Component {
 
     loadBarChart() {
         if (this.state.quintileData.length === 0) {
-            return <div> Loading </div>
+            return <div> No Data </div>
         } else {
             var config = {
                 title: {
@@ -56,16 +56,8 @@ class Quintiles extends Component {
     render() {
         return (
             <div>
-                <Container className="quintile-container">
-                    <Row>
-                        <Col className="quintile-col1">
-                            {this.loadInputFormQuintile()}
-                        </Col>
-                        <Col className="quintile-col2">
-                            {this.loadBarChart()}
-                        </Col>
-                    </Row>
-                </Container>
+                {this.loadInputFormQuintile()}
+                {this.loadBarChart()}
             </div>
         )
     }
