@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Card, Button} from 'react-bootstrap'
+import '../../Style/InfoCard.css'
 
 class InfoCard extends Component {
 
@@ -9,8 +10,11 @@ class InfoCard extends Component {
 
     render () {
         return (
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
+            <Card className="cards" style={{ width: '18rem' }}>
+                <div class='image-wrapper'>
+                    <Card.Img variant="top" src={this.props.img} />
+                </div>
+                
                 <Card.Body>
                     <Card.Title>{this.props.title}</Card.Title>
                     <Card.Text>

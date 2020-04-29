@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import {Tab, Row, Col, Nav, Jumbotron, Button} from 'react-bootstrap'
 import InfoCard from './InfoCard'
+import time from './time.png'
+import prediction from './prediction.png'
+import search from './search.png'
+import feature from './feature.png'
 import '../../Style/Info.css'
 
 class Info extends Component {
@@ -34,10 +38,10 @@ class Info extends Component {
                                     </p>
                                 </Jumbotron>
                                 <div class="card-wrapper">
-                                    <InfoCard title={"Search and Show"} info={"hello"} />
-                                    <InfoCard title={"Time Series"} info={"hello"} />
-                                    <InfoCard title={"Features"} info={"hello"} />
-                                    <InfoCard title={"Predictions"} info={"hello"} />
+                                    <InfoCard className="cards" title={"Search and Show"} info={"hello"} img={search}/>
+                                    <InfoCard className="cards" title={"Time Series"} info={"hello"} img={time}/>
+                                    <InfoCard className="cards" title={"Features"} info={"hello"} img={feature}/>
+                                    <InfoCard className="cards" title={"Predictions"} info={"hello"} img={prediction}/>
                                 </div>
                                     
 
