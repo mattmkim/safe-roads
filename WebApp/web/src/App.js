@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import './navbar.css'
 import Profile from './Components/Profile/Profile'
 import TimeSeries from './Components/Time Series/TimeSeries'
-import PredictionsMain from './Components/Predictions/PredictionsMain'
+import Predictions from './Components/Predictions/Predictions'
 import SearchShow from './Components/SearchShow/SearchShow'
 import Features from './Components/Features/Features'
 class App extends Component {
@@ -28,7 +28,7 @@ class App extends Component {
         } else if (currentPage === 'time series') {
             return <TimeSeries />
         } else if (currentPage === 'predictions') {
-            return <PredictionsMain/>
+            return <Predictions/>
         } else if (currentPage === 'search and show') {
             return <SearchShow/>
         } else if (currentPage === 'features') {

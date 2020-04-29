@@ -43,7 +43,7 @@ module.exports = function (database) {
     response.runPredictionModel = async function (req, res) {
         console.log('prediction model for temperature range')
         var city = req.body.city;
-        var attribute = req.body.attribute;
+        var attribute = req.body.attribute.label;
         let query = `SELECT feats.Year year, feats.Month month, AVG(feats.tmp) temp_avg, AVG(feats.tmpdiff) temp_range, AVG(feats.hu) humidity, AVG(feats.pr) pressure, AVG(feats.ws) wind_speed, AVG(feats.severity) severity
         FROM ( 
             SELECT Acc.city city, EXTRACT(year from Acc.time) Year, EXTRACT(month from Acc.time) Month, EXTRACT(day from Acc.time) Day, Acc.severity severity, Wte.tmp tmp, Wte.tmpdiff tmpdiff, Wte.hu hu, Wte.pr pr, Wte.ws ws
@@ -57,13 +57,14 @@ module.exports = function (database) {
         GROUP BY feats.Year, feats.Month
         ORDER BY feats.Year, feats.Month`;
         var response = await database.execute(query);
-
+        console.log(attribute);
         // preprocess data
-        var data = response.rows.map((data) => { return {isProjection: "not projection", attr: data[attribute], date: new Date(data.YEAR, data.MONTH) } })
+        var data = response.rows.map((data) => {console.log(data);return {isProjection: "not projection", attr: data[attribute], date: new Date(data.YEAR, data.MONTH) } })
         var t = new timeseries.main(timeseries.adapter.fromDB(data, {
             date: 'date',     // Name of the property containing the Date (must be compatible with new Date(date) )
             value: 'attr'     // Name of the property containign the value.
         }));
+        console.log(data);
         const initData = data;
         // get forecast value for next few dates
         var forecasts = [] 
