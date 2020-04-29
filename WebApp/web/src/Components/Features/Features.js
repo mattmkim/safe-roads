@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Select from 'react-select';
 import './Features.css';
-import { ColumnChart } from '@opd/g2plot-react';
+import { ColumnChart, GroupedColumnChart } from '@opd/g2plot-react';
 import axios from 'axios';
 import FeatureButton from './FeatureButton';
 import FeaturesRow from './FeaturesRow';
@@ -15,7 +15,8 @@ class Features extends Component {
             features: [],
             storage: [],
             stat: [],
-            stats: []
+            stats: [],
+            allFeats: []
         }
 
         this.showFeatures = this.showFeatures.bind(this);
@@ -47,12 +48,16 @@ class Features extends Component {
         if (response.data) {
             var featureList = response.data.rows;
             let featureDivs = featureList.map((feature) => <FeaturesRow year={feature.YEAR} month={feature.MONTH} severity={Math.round(feature.SEVERITY * 100) / 100} temp_avg={Math.round((feature.TEMP_AVG - 273.15) * 100) / 100} 
-            temp_rng={Math.round(feature.TEMP_RANGE * 100) / 100} humidity={Math.round(feature.HUMIDITY * 100) / 100} pressure={Math.round(feature.PRESSURE * 100) / 100} wspeed={Math.round(feature.WIND_SPEED * 100) / 100} />);
+            temp_rng={Math.round(feature.TEMP_RANGE * 100) / 100} humidity={Math.round(feature.HUMIDITY * 100) / 100} pressure={Math.round(feature.PRESSURE * 10) / 100} wspeed={Math.round(feature.WIND_SPEED * 100) / 100} />);
             let storageDivs = featureList.map((feature) => {return {date: `${feature.YEAR}-${feature.MONTH}`, severity: Math.round(feature.SEVERITY * 100) / 100, temp_avg: Math.round((feature.TEMP_AVG - 273.15) * 100) / 100, 
-            temp_rng: Math.round(feature.TEMP_RANGE * 100) / 100, humidity: Math.round(feature.HUMIDITY * 100) / 100, pressure: Math.round(feature.PRESSURE * 100) / 100, wspeed: Math.round(feature.WIND_SPEED * 100) / 100} });
+            temp_rng: Math.round(feature.TEMP_RANGE * 100) / 100, humidity: Math.round(feature.HUMIDITY * 100) / 100, pressure: Math.round(feature.PRESSURE * 10) / 100, wspeed: Math.round(feature.WIND_SPEED * 100) / 100} });
+            let allFeatDivs = featureList.flatMap((feature) => {return [{date: `${feature.YEAR}-${feature.MONTH}`, type: 'accident severity (1-4)', value: Math.round(feature.SEVERITY * 100) / 100}, {date: `${feature.YEAR}-${feature.MONTH}`, type: 'temperature average (°C)', value: Math.round((feature.TEMP_AVG - 273.15) * 100) / 100}, 
+            {date: `${feature.YEAR}-${feature.MONTH}`, type: 'temperature range (°C)', value: Math.round(feature.TEMP_RANGE * 100) / 100}, {date: `${feature.YEAR}-${feature.MONTH}`, type: 'humidity (g/m\u00B3)', value: Math.round(feature.HUMIDITY * 40) / 100}, 
+            {date: `${feature.YEAR}-${feature.MONTH}`, type: 'pressure (atm)', value: Math.round(feature.PRESSURE * 0.0987) / 100}, {date: `${feature.YEAR}-${feature.MONTH}`, type: 'wind speed (m/s)', value: Math.round(feature.WIND_SPEED * 100) / 100} ] });
             this.setState({
                 features: featureDivs,
-                storage: storageDivs
+                storage: storageDivs,
+                allFeats: allFeatDivs
             });
         }
     }
@@ -62,24 +67,31 @@ class Features extends Component {
             return <div>Loading Visualization...</div>
         } else {
             let input_color = '';
+            let input_title = '';
             if (input_feat === 'severity') {
-                input_color = 'black';
+                input_color = 'lightcoral';
+                input_title = 'Accident Severity';
             } else if (input_feat === 'temp_avg'){
-                input_color = 'red';
+                input_color = 'khaki';
+                input_title = 'Temperature Average';
             } else if (input_feat === 'temp_rng') {
-                input_color = 'orange';
+                input_color = 'greenyellow';
+                input_title = 'Temperature Range';
             } else if (input_feat === 'humidity') {
-                input_color = 'green';
+                input_color = 'lightskyblue';
+                input_title = 'Humdity';
             } else if (input_feat === 'pressure') {
-                input_color = 'blue';
+                input_color = 'mediumslateblue';
+                input_title = 'Pressure';
             } else if (input_feat === 'wspeed') {
-                input_color = 'purple';
+                input_color = 'mediumorchid';
+                input_title = 'Wind Speed';
             }
             var config = {
                 height: 500,
                 title: {
                     visible: true,
-                    text: 'Feature visualization for ' + input_city
+                    text: input_title + ' for ' + input_city
                 },
                 description: {
                     visible: true,
@@ -98,6 +110,36 @@ class Features extends Component {
         }
     }
 
+    loadAllVisualization(input_city) {
+        if (this.state.storage.length === 0) {
+            return <div>Loading Visualization...</div>
+        } else {
+            var config = {
+                height: 500,
+                title: {
+                    visible: true,
+                    text: 'Feature summary for ' + input_city
+                },
+                description: {
+                    visible: true,
+                    text: 'Stacked area chart for understanding city-specific accident/weather features at one glance'
+                },
+                forceFit: true,
+                xField: 'date',
+                yField: 'value',
+                stackField: 'type',
+                legend: {
+                    visible: true,
+                    position: 'top-center',
+                },
+                responsive: true,
+                data: this.state.allFeats,
+                color: ['lightcoral', 'khaki', 'greenyellow', 'lightskyblue', 'mediumslateblue', 'mediumorchid'],
+            }
+            return <GroupedColumnChart {...config} />
+        }
+    }
+
     render () {
         const {city} = this.state;
         return (
@@ -110,6 +152,7 @@ class Features extends Component {
                         </div>
                     </div>
                 </div>
+                {this.loadAllVisualization(this.state.city)}
                 <br></br>
                 <div>
                     <div className="h6">Please choose a weather feature to observe.</div>
@@ -130,7 +173,7 @@ class Features extends Component {
                             <div className="header"><strong>Temperature (Celsius)</strong></div>
                             <div className="header"><strong>Temperature Range</strong></div>
                             <div className="header-sm"><strong>Humidity</strong></div>
-                            <div className="header-sm"><strong>Pressure (hPa)</strong></div>
+                            <div className="header-sm"><strong>Pressure (kPa)</strong></div>
                             <div className="header-sm"><strong>Wind Speed (m/s)</strong></div>
                         </div>
                         <div className="results-container" id="results">

@@ -21,7 +21,6 @@ app.get('/api/test', routes.getTestQuery);
 app.get('/api/testKill', routes.getTestKill);
 app.get('/api/city', routes_city.getCityQuery);
 app.get('/api/cityKill', routes_city.getCityKill);
-app.get('/api/prediction', predictionRoutes.getPredictionQuery);
 app.get('/api/prediction/:city', predictionRoutes.getPredictionQueryCity);
 app.get('/api/predictionKill', predictionRoutes.getPredictionKill);
 app.get('/api/getWeatherAccidentDeviations', predictionRoutes.getWeatherAccidentDeviations);

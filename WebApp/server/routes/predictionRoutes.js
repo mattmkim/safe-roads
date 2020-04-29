@@ -1,22 +1,6 @@
 module.exports = function(database) {
     var response = {};
 
-    // query for obtaining predictions
-    response.getPredictionQuery = async function(req, res) {
-        let query = `SELECT CAST(AVG(feats.tmp) AS DECIMAL(10, 2)) temp_avg, CAST(AVG(feats.tmpdiff) AS DECIMAL(10, 2)) temp_range, CAST(AVG(feats.hu) AS DECIMAL(10, 2)) humidity, CAST(AVG(feats.pr) AS DECIMAL(10, 2)) pressure, CAST(AVG(feats.ws) AS DECIMAL(10, 2)) wind_speed, CAST(AVG(feats.severity) AS DECIMAL(10, 2)) severity
-        FROM (
-            SELECT Acc.city city, TRUNC(Acc.time) time, Acc.severity severity, Wte.tmp tmp, Wte.tmpdiff tmpdiff, Wte.hu hu, Wte.pr pr, Wte.ws ws
-            FROM Accident Acc JOIN (
-                SELECT city, TRUNC(time) time, AVG(temperature) tmp, MAX(temperature) - MIN(temperature) tmpdiff, AVG(humidity) hu, AVG(pressure) pr, AVG(wind_speed) ws
-                FROM Weather
-                GROUP BY city, TRUNC(time)
-            ) Wte ON Acc.city = Wte.city AND TRUNC(Acc.time) = Wte.time
-        ) feats
-        GROUP BY feats.City, feats.time`;
-        const response = await database.execute(query);
-        res.send(response);
-    };
-
     // query for obtaining features of a user-specified city
     response.getPredictionQueryCity = async function(req, res) {
         console.log('Querying database for city-specific features')
