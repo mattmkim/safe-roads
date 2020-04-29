@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Select from 'react-select';
 import './Features.css';
-import { ScatterChart } from '@opd/g2plot-react';
+import { GroupedColumnChart } from '@opd/g2plot-react';
 import axios from 'axios';
 import FeaturesRow from './FeaturesRow';
 
@@ -11,10 +11,12 @@ class Features extends Component {
         this.state = {
             city: [],
             cities: [],
-            features: []
+            features: [],
+            storage: []
         }
 
         this.showFeatures = this.showFeatures.bind(this);
+        this.loadVisualization = this.loadVisualization.bind(this);
     }
 
     async componentDidMount() {
@@ -39,9 +41,52 @@ class Features extends Component {
             var featureList = response.data.rows;
             let featureDivs = featureList.map((feature) => <FeaturesRow year={feature.YEAR} month={feature.MONTH} severity={Math.round(feature.SEVERITY * 100) / 100} temp_avg={Math.round((feature.TEMP_AVG - 273.15) * 100) / 100} 
             temp_rng={Math.round(feature.TEMP_RANGE * 100) / 100} humidity={Math.round(feature.HUMIDITY * 100) / 100} pressure={Math.round(feature.PRESSURE * 100) / 100} wspeed={Math.round(feature.WIND_SPEED * 100) / 100} />);
+            let storageDivs = featureList.map((feature) => {return {date: `${feature.YEAR}-${feature.MONTH}`, severity: Math.round(feature.SEVERITY * 100) / 100, temp_avg: Math.round((feature.TEMP_AVG - 273.15) * 100) / 100, 
+            temp_rng: Math.round(feature.TEMP_RANGE * 100) / 100, humidity: Math.round(feature.HUMIDITY * 100) / 100, pressure: Math.round(feature.PRESSURE * 100) / 100, wspeed: Math.round(feature.WIND_SPEED * 100) / 100} });
             this.setState({
-                features: featureDivs
+                features: featureDivs,
+                storage: storageDivs
             });
+        }
+    }
+
+    loadVisualization(input_city, input_feat) {
+        if (this.state.storage.length === 0) {
+            return <div>Loading Visualization...</div>
+        } else {
+            let input_color = '';
+            if (input_feat === 'temp_avg'){
+                input_color = 'red';
+            } else if (input_feat === 'temp_rng') {
+                input_color = 'orange';
+            } else if (input_feat === 'humidity') {
+                input_color = 'green';
+            } else if (input_feat === 'pressure') {
+                input_color = 'blue';
+            } else if (input_feat === 'wspeed') {
+                input_color = 'purple';
+            }
+            var config = {
+                height: 500,
+                title: {
+                    visible: true,
+                    text: 'Feature visualization for ' + input_city
+                },
+                description: {
+                    visible: true,
+                    text: 'Bar chart for understanding city-specific accident/weather features at one glance'
+                },
+                forceFit: true,
+                xField: 'date',
+                yField: input_feat,
+                label: {
+                    visible: true,
+                },
+                groupField: 'type',
+                data: this.state.storage,
+                color: input_color
+            }
+            return <GroupedColumnChart {...config} />
         }
     }
 
@@ -58,6 +103,8 @@ class Features extends Component {
                         <div className="h5">Current city: {this.state.city}</div>
                     </div>
                 </div>
+                <br></br>
+                {this.loadVisualization(this.state.city, 'temp_avg')}
                 <br></br>
                 <div className="features">
                     <div className="features-container">
