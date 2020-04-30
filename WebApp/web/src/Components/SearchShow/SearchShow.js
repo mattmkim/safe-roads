@@ -27,7 +27,7 @@ class SearchShow extends Component {
                         <li className="nav-item">
                             <a onClick = {() => {this.setState({content: 'SharedCodes'})}} className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                                SharedCodes
+                                Shared Codes
                             </a>
                         </li>
                     </ul>

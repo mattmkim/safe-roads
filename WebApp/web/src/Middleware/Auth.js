@@ -34,6 +34,13 @@ class Auth {
 
         callback(value);
     }
+
+    async getFavCity (obj, callback) {
+        const res = await axios.post('/api/getfavcity', obj)
+        const value = res.data;
+
+        callback(value);
+    }
 }
 
 export default new Auth();

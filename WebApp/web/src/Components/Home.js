@@ -8,6 +8,7 @@ import TimeSeries from '../Components/Time Series/TimeSeries'
 import Predictions from '../Components/Predictions/Predictions'
 import SearchShow from '../Components/SearchShow/SearchShow'
 import Features from '../Components/Features/Features'
+import Auth from '.././Middleware/Auth'
 import '../Style/Home.css'
 class Home extends Component {
     // change ur respective stuff
@@ -15,9 +16,29 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPage: 'profile'
+            currentPage: 'profile',
+            favcity: ''
         }
     }
+
+    componentDidMount() {
+        var email = localStorage.getItem("email");
+
+        var obj = {email: email};
+
+        Auth.getFavCity(obj, (result) => {
+            if (result === "error") {
+                this.setState({
+                    favcity: ''
+                })
+            } else {
+                this.setState({
+                    favcity: result
+                })
+            }
+        })
+    }
+
     logout() {
         console.log("logout")
         this.props.history.push({
@@ -27,17 +48,22 @@ class Home extends Component {
 
     renderBody() {
         var currentPage = this.state.currentPage;
+
+        console.log(this.state.favcity);
+
         if(currentPage === 'profile') {
-            return <Info />
+            return <Info favcity={this.state.favcity} />
         } else if (currentPage === 'time series') {
-            return <TimeSeries />
+            return <TimeSeries favcity={this.state.favcity}/>
         } else if (currentPage === 'predictions') {
-            return <Predictions/>
+            return <Predictions favcity={this.state.favcity}/>
         } else if (currentPage === 'search and show') {
-            return <SearchShow/>
+            return <SearchShow favcity={this.state.favcity}/>
         } else if (currentPage === 'features') {
-            return <Features/>
+            return <Features favcity={this.state.favcity}/>
         }
+
+        
     }
     render() {
         return <div>

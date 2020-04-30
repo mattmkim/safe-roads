@@ -88,11 +88,30 @@ var routes = function(User) {
         })
     }
 
+    var getFavCity = function(req, res) {
+        var email = req.body.email;
+
+        User.find({email: email}, function(err, response) {
+            if (err) {
+                console.log(err);
+                res.send("error");
+            } else {
+                if (response.length == 0) {
+                    res.send("error");
+                } else {
+                    var city = response[0].favcity;
+                    res.send(city);
+                }
+            }
+        })
+    }
+
     return {
         check_login: checkLogin,
         signup: signup,
         delete_profile: deleteProfile,
-        update_city: updateCity
+        update_city: updateCity,
+        get_fav_city: getFavCity
     }
 }
 
