@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import CodesDropDown from './CodesDropDown'
 import options from './options';
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import {Card, Table} from 'react-bootstrap'
 import '../../Style/SearchShow.css'
 import { RoseChart, PieChart } from '@opd/g2plot-react';
 
@@ -38,21 +37,47 @@ class SharedCodes extends Component {
 
     loadVisualization() {
         if (this.state.codesData.length == 0) {
-            return <div> Loading </div>
+            return <div>  </div>
         } else {
             const newData = [];
             const seenCodes = [];
-            const data = []
+            const data = [];
+            
+            var tabledata = [];
+            var prevCity = '';
+            var codes = '';
 
-            for (var i; i < this.state.codesData.length; i++) {
-                
-            }
             for (var i = 0; i < this.state.codesData.length; i++) {
+                console.log(prevCity);
                 var city = this.state.codesData[i].CITY;
                 var rank = this.state.codesData[i].RANK;
                 var type = this.state.codesData[i].CODE;
                 var value = this.state.codesData[i].COUNT2;
                 data.push(<div key={i}>city: {city} rank: {rank} code: {type} frequency: {value}</div>)
+                
+
+                if (prevCity === '') {
+                    prevCity = city;
+                    codes = codes + type + ', ';
+                } else if (i == this.state.codesData.length - 1) {
+                    codes = codes + type;
+                    var obj = {city: city, codes: codes};
+                    console.log(obj);
+                    tabledata.push(obj);
+                } else {
+                    if (prevCity === city) {
+                        codes = codes + type + ', ';
+                    } else {
+                        codes = codes.substring(0, codes.length - 2);
+                        var obj = {city: prevCity, codes: codes};
+                        tabledata.push(obj);
+                        console.log(obj);
+                        codes = '';
+                        codes = codes + type + ', ';
+                        prevCity = city;
+                    }
+                }
+
                 if (seenCodes.includes(type)) {
                     continue;
                 } else {
@@ -62,22 +87,62 @@ class SharedCodes extends Component {
                 }
             }
 
+            console.log(tabledata);
+
             var config = {
+                height: 475,
                 title: {
                     visible: true,
                     text: 'Shared Codes',
                 }, 
+                description: {
+                    visible: true,
+                    alignTo: 'left',
+                    text: 'Frequency of TMC codes among selected cities'
+
+                },
                 data: newData,
                 radiusField: "value",
-                categoryField: "type"
+                categoryField: "type",
+                colorField: "type",
+                label: {
+                    visible: true,
+                    type: 'outer',
+                    formatter: (text) => text,
+                },
+                legend: {
+                    visible: true,
+                    position: 'bottom-center'
+                }, 
+                tooltip: {
+                    visible: true,
+                    offset: 20,
+                }
 
             }
 
             return ( 
-                <div>
-                    <RoseChart {...config} /> 
+                <div class="visualize-container">
+                    <div class="rose">
+                        <RoseChart {...config} /> 
+                    </div>
                     <div>
-                        {data}
+                        <Table striped bordered hover variant="light">
+                            <thead>
+                                <tr>
+                                    <th>City</th>
+                                    <th>Top Codes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {tabledata.map(entry => 
+                                    <tr key={entry.city}>
+                                        <th class="table-body"> {entry.city} </th>
+                                        <th class="table-body"> {entry.codes} </th>
+                                    </tr>    
+                                )}
+                            </tbody>
+                        </Table>    
                     </div>
                 </div>
 
@@ -95,15 +160,15 @@ class SharedCodes extends Component {
         return (
             <div>
                 <Container className="codes-container">
-                    <Row>
-                        <Col className="codes-col1">
-                            {this.loadInputFormCodes()}
+                <div class="description" style = {{height: '100%', width: '85%'}}>
+                    <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                    View shared TMC codes among the user selected amounnt of codes from the specified cities. 
+                    <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                    Select any number of cities from the dropdown, and specify a positive integer value for the number of codes to display. 
+                </div>
+                    {this.loadInputFormCodes()}
 
-                        </Col>
-                        <Col className="codes-col2">
-                            {this.loadVisualization()}
-                        </Col>
-                    </Row>
+                    {this.loadVisualization()}
                 </Container>
             </div>
         )
