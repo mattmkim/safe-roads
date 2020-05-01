@@ -147,49 +147,60 @@ class Features extends Component {
     }
     renderContent() {
         if (this.state.content === "table") {
-            return   <div>
-            <div className="h5">Detailed Statistics for {this.state.city}</div>
-            <div className="features">
-                <div className="features-container">
-                    <div className="features-header">
-                        <div className="header-lg"><strong>Year</strong></div>
-                        <div className="header-lg"><strong>Month</strong></div>
-                        <div className="header"><strong>Accident Severity(1-4)</strong></div>
-                        <div className="header"><strong>Temperature (Celsius)</strong></div>
-                        <div className="header"><strong>Temperature Range</strong></div>
-                        <div className="header-sm"><strong>Humidity</strong></div>
-                        <div className="header-sm"><strong>Pressure (kPa)</strong></div>
-                        <div className="header-sm"><strong>Wind Speed (m/s)</strong></div>
-                    </div>
-                    <div className="results-container" id="results">
-                        {this.state.features}
+            return (
+            <div>
+                <div class="description">
+
+                <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                View the raw data over time for various accident and weather features for a specified city.
+                </div>
+                <div className="h5">Detailed Statistics for {this.state.city}</div>
+                <div className="features">
+                    <div className="features-container">
+                        <div className="features-header">
+                            <div className="header-lg"><strong>Year</strong></div>
+                            <div className="header-lg"><strong>Month</strong></div>
+                            <div className="header"><strong>Accident Severity(1-4)</strong></div>
+                            <div className="header"><strong>Temperature (Celsius)</strong></div>
+                            <div className="header"><strong>Temperature Range</strong></div>
+                            <div className="header-sm"><strong>Humidity</strong></div>
+                            <div className="header-sm"><strong>Pressure (kPa)</strong></div>
+                            <div className="header-sm"><strong>Wind Speed (m/s)</strong></div>
+                        </div>
+                        <div className="results-container" id="results">
+                            {this.state.features}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>)
         } else if (this.state.content === "specific") {
-            return <div>
-                <div>
-                    <div className="h6">Please choose a weather feature to observe.</div>
-                </div>
+            return (
+            <div>
+
+
+                <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                View trends in various weather and accident features for a specified city.
+                <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                Select an accident or weather feature to observe.
+                <div style = {{marginTop: '20px'}}>
                 <div className="stats-container">
                     {this.state.stats}
                 </div>
-                <br></br>
-                {this.loadVisualization(this.state.city, this.state.stat)}
-                <br></br>
-            </div>
-        } else {
-            return <div>
-                <div className="cities">
-                        <div className="h3">Accident/Weather Features for U.S. Cities</div>
-                        <div className="cities-container">
-                            <Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false} />
-                        </div>
                 </div>
+                
+                {this.loadVisualization(this.state.city, this.state.stat)}
+            </div>)
+        } else {
+            return (
+            <div>
+                <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                View city-specific accident and weather features.
+                <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                Select a city from the dropdown form below to view city specific data.
+                <div style = {{marginTop: '20px'}}><Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false} /></div>
                 {this.loadAllVisualization(this.state.city)}
-                <br></br>
-            </div>
+
+            </div>)
         }
     }
 
@@ -198,7 +209,7 @@ class Features extends Component {
 
             <div className="features-page">
                 <div className="vertical-nav bg-light" id="sidebar" style={{ float: "left" }}>
-                    <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+                    <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Tabs</p>
 
                     <ul className="nav flex-column bg-light mb-0">
                         <li className="nav-item">

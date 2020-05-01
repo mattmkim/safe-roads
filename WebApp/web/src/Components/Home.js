@@ -11,6 +11,7 @@ import TimeSeries from '../Components/Time Series/TimeSeries'
 import Predictions from '../Components/Predictions/Predictions'
 import SearchShow from '../Components/SearchShow/SearchShow'
 import Features from '../Components/Features/Features'
+import Profile from '../Components/Profile/Profile'
 import Auth from '.././Middleware/Auth'
 import options from '../Components/SearchShow/options'
 import '../Style/Home.css'
@@ -21,7 +22,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPage: 'profile',
+            currentPage: 'info',
             favcity: '',
             showModal: false,
             validUpdate: ''
@@ -98,7 +99,7 @@ class Home extends Component {
 
         console.log(this.state.favcity);
 
-        if(currentPage === 'profile') {
+        if(currentPage === 'info') {
             return <Info favcity={this.state.favcity} />
         } else if (currentPage === 'time series') {
             return <TimeSeries favcity={this.state.favcity}/>
@@ -108,7 +109,9 @@ class Home extends Component {
             return <SearchShow favcity={this.state.favcity}/>
         } else if (currentPage === 'features') {
             return <Features favcity={this.state.favcity}/>
-        } 
+        } else if (currentPage === 'profile') {
+            return <Profile favcity={this.state.favcity}/>
+        }
     }
 
     render() {
@@ -126,8 +129,9 @@ class Home extends Component {
                 </div>
             <div className="wrapper">
                 <Navbar className="navbar" variant="dark">
-                    <Navbar.Brand href="/home" className="navbar-title" onClick={() => { this.setState({ currentPage: 'profile' }) }}>Safe Roads</Navbar.Brand>
+                    <Navbar.Brand href="/home" className="navbar-title" onClick={() => { this.setState({ currentPage: 'info' }) }}>Safe Roads</Navbar.Brand>
                     <Nav className="container-fluid">
+                        <Nav.Link classname="tabs" onClick={() => { this.setState({currentPage: 'profile'})}}>Profile</Nav.Link>
                         <Nav.Link className="tabs" onClick={() => { this.setState({currentPage: 'search and show'})}}>City Comparison</Nav.Link>
                         <Nav.Link className="tabs" onClick={() => { this.setState({ currentPage: 'features'}) }}>City Statistics</Nav.Link>
                         <Nav.Link className="tabs" onClick={() => { this.setState({ currentPage: 'time series' }) }}>Time Series Visualization</Nav.Link>

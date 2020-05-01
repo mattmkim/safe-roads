@@ -1,0 +1,17 @@
+.image-wrapper-prof {
+    height: 150px;
+}
+
+.rounded {
+    height: 150px;
+}
+
+.lel{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 250px !important;
+    height: 250px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

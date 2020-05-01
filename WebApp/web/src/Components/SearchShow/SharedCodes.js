@@ -46,6 +46,7 @@ class SharedCodes extends Component {
             var tabledata = [];
             var prevCity = '';
             var codes = '';
+            var numCodes = 0;
 
             for (var i = 0; i < this.state.codesData.length; i++) {
                 console.log(prevCity);
@@ -55,6 +56,7 @@ class SharedCodes extends Component {
                 var value = this.state.codesData[i].COUNT2;
                 data.push(<div key={i}>city: {city} rank: {rank} code: {type} frequency: {value}</div>)
                 
+                console.log(numCodes);
 
                 if (prevCity === '') {
                     prevCity = city;
@@ -124,7 +126,7 @@ class SharedCodes extends Component {
             return ( 
                 <div class="visualize-container">
                     <div class="rose">
-                        <RoseChart {...config} /> 
+                        <RoseChart className="chart" {...config} /> 
                     </div>
                     <div>
                         <Table striped bordered hover variant="light">

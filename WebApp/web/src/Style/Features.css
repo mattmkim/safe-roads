@@ -25,6 +25,10 @@
   background-color: rgb(108, 173, 223);
 }
 
+.description {
+    margin-bottom: 20px;
+}
+
 .features-container .features-header, .results-container .feature {
   display: flex;
   flex-flow: row nowrap;
