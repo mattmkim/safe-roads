@@ -44,6 +44,7 @@ app.get('/api/timeSeries', timeSeriesRoutes.getTimeSeriesQuery);
 app.get('/api/timeSeries/:city', timeSeriesRoutes.getTimeSeriesQueryCity);
 app.get('/api/timeSeriesKill', timeSeriesRoutes.getTimeSeriesKill);
 app.post('/api/testTimeSeries', predictionRoutes.runPredictionModel);
+app.get('/api/testRegressionDeviations', predictionRoutes.getWeatherAccidentRegressions);
 
 const listener = app.listen(5000);
 // incase control c is not working some weird stuff

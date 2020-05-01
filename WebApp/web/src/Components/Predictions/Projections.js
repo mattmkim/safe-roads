@@ -72,12 +72,13 @@ class Projections extends Component {
                 data: this.state.data,
             }
             console.log(config);
-            return <LineChart {...config} />
+            return <div><h4> The Graph </h4><LineChart {...config} /></div>
         }
     }
     loadInputForm() {
         return (
-            <div>
+            <div style = {{marginTop: '20px'}}>
+                <h4> Input </h4>
                 <form onSubmit={async (e) => {
                     e.preventDefault();
                     var obj = {
@@ -109,6 +110,11 @@ class Projections extends Component {
     render() {
         return (
             <div>
+                  <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                We had years and years of granular data mapping relationships between various accident data and weather. We wondered, could our data be used to project the future.
+                Using AR coefficients and time series analysis, we've projected 5 months in advance with this feature 
+                <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                Put in your city and select what attribute you want to see, then see our projections
                 {this.loadInputForm()}
                 {this.loadLinePlot()}
             </div>

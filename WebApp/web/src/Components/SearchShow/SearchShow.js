@@ -32,7 +32,7 @@ class SearchShow extends Component {
                         </li>
                     </ul>
                 </div>
-                <div style = {{margin: '20rem', marginTop: '30px'}}>
+                <div style = {{ marginLeft: '17rem', marginTop: '30px'}}>
                 {this.renderContent()} </div>
                 
                 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import DropDown from './CitiesDropDown'
 import options from './options';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+// import Container from 'react-bootstrap/Container'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
 import '../../Style/SearchShow.css'
 import { BarChart } from '@opd/g2plot-react';
 class Quintiles extends Component {
@@ -56,7 +56,11 @@ class Quintiles extends Component {
     render() {
         return (
             <div>
-                {this.loadInputFormQuintile()}
+                 <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                See where a city falls in the quintiles of accidents. Rank 5 would be the most frequent in the US and rank 1 would be the least.
+                <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                Either select in the drop down or type a comma separated list of cities.
+                <div style = {{marginTop: '20px'}}>{this.loadInputFormQuintile()} </div>
                 {this.loadBarChart()}
             </div>
         )

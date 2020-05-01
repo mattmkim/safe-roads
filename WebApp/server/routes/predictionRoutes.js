@@ -1,6 +1,7 @@
 
 
 var timeseries = require("timeseries-analysis");
+var regression = require('regression');
 module.exports = function (database) {
     var response = {};
 
@@ -74,36 +75,48 @@ module.exports = function (database) {
         // console.log(results);
         res.send(results);
     }
-
+    let weatherAccidentQuery = `WITH severity (city, deviation) AS (SELECT acc_av.city as city, acc_av.average as deviation
+        FROM (
+        SELECT city, AVG(severity) as average 
+        FROM Accident a
+        GROUP BY city 
+        ) acc_av
+        ), 
+        rain (city, deviation) AS (
+        SELECT city_av.city as city, city_av.average as deviation
+        FROM (
+        SELECT city, AVG(humidity) as average 
+        FROM Weather
+        GROUP BY city
+        ) city_av), 
+        severityAverage(average) AS (SELECT AVG(severity) as average
+          FROM Accident),
+        humidityAverage(average) AS (SELECT AVG(humidity) as average
+             FROM Weather) 
+        SELECT rain.city AS city, rain.deviation - humidityAverage.average AS rainDeviation, severity.deviation - severityAverage.average AS serverityDeviation
+        FROM rain
+        JOIN severity
+        ON rain.city = severity.city
+        CROSS JOIN severityAverage
+        CROSS JOIN humidityAverage        
+        `
     response.getWeatherAccidentDeviations = async function (req, res) {
         console.log("called weather accident deviations. I.e query number 1 ");
-        let query = `WITH severity (city, deviation) AS (SELECT acc_av.city as city, acc_av.average as deviation
-            FROM (
-            SELECT city, AVG(severity) as average 
-            FROM Accident a
-            GROUP BY city 
-            ) acc_av
-            ), 
-            rain (city, deviation) AS (
-            SELECT city_av.city as city, city_av.average as deviation
-            FROM (
-            SELECT city, AVG(humidity) as average 
-            FROM Weather
-            GROUP BY city
-            ) city_av), 
-            severityAverage(average) AS (SELECT AVG(severity) as average
-              FROM Accident),
-            humidityAverage(average) AS (SELECT AVG(humidity) as average
-                 FROM Weather) 
-            SELECT rain.city AS city, rain.deviation - humidityAverage.average AS rainDeviation, severity.deviation - severityAverage.average AS serverityDeviation
-            FROM rain
-            JOIN severity
-            ON rain.city = severity.city
-            CROSS JOIN severityAverage
-            CROSS JOIN humidityAverage        
-            `
+        let query = weatherAccidentQuery;
         const response = await database.execute(query);
         res.send(response)
+    }
+    response.getWeatherAccidentRegressions = async function (req, res) {
+        console.log("called weather accident regressions");
+        let query = weatherAccidentQuery;
+        const response = await database.execute(query);
+        const data = response.rows.map((data) => {return [data.RAINDEVIATION, data.SERVERITYDEVIATION]});
+        console.log(data);
+        const result = regression.polynomial(data, { order: 3});
+        const equation = result.predict(2.3123)
+        console.log(equation);
+        res.end();
+        // add the regression framework in
     }
 
     response.getPredictionKill = async function (req, res) {

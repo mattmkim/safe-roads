@@ -10,6 +10,7 @@
     "mongoose": "^5.9.10",
     "oracledb": "github:oracle/node-oracledb#v4.2.0",
     "react-bootstrap": "^1.0.1",
+    "regression": "^2.0.1",
     "timeseries-analysis": "^1.0.12"
   },
   "devDependencies": {},

@@ -3,9 +3,8 @@ import { ScatterChart } from '@opd/g2plot-react';
 import axios from 'axios';
 
 var rainDeviation = 0;
-var severityDeviation = 0;
 
-class Deviations extends Component {
+class DeviationProjections extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -80,15 +79,13 @@ class Deviations extends Component {
     loadInputForm() {
         return <div style = {{marginTop: "20px"}}>
             <form onSubmit={(e) => {
+                // need to rework this logic to include the predictions api. Major reworking needed
                 e.preventDefault();
                 const val1 = parseFloat(rainDeviation)
-                const val2 = parseFloat(severityDeviation)
-                this.setState({ raindeviation: val1, severitydeviation: val2, data: [...this.state.data, { city: "Your entry", raindeviation: parseFloat(rainDeviation), severitydeviation: val2 }] })
+                // this is for compiling
+                const val2 = 2
+                this.setState({ raindeviation: val1, data: [...this.state.data, { city: "Your entry", raindeviation: parseFloat(rainDeviation), severitydeviation: val2 }] })
             }}>
-                <div className="form-group">
-                    <label>Deviation of Severity</label>
-                    <input type = "number" step = "any" required = "true" max = "1" min = "0" className="form-control" value={this.state.severityDeviation} onChange={(e) => { severityDeviation = e.target.value }} aria-describedby="emailHelp" placeholder="Enter deviation for accident severity" />
-                </div>
                 <div className="form-group">
                     <label>Deviation of Rain</label>
                     <input type = "number" step = "any" required = "true" max = "1" min = "0" className="form-control" value={this.state.rainDeviation} onChange={(e) => { rainDeviation = e.target.value }} placeholder='Enter Deviation for amount rain' />
@@ -105,7 +102,7 @@ class Deviations extends Component {
         return (
             <div style = {{height: '100%', width: '85%'}}>
                 <h4 style = {{marginTop: "10px"}}> Description </h4> 
-                Accident frequency and amount of rain are correlated. This feature allows you to input hypothetical weather conditions for a city and compare it to the real ones in our data set. 
+                We use least-squares regression analysis to predict what accident frequency for a city would be give nweather conditions.
                 <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
                 The input must take a form of a decimal between 0 and 100 for each attribute: this will represent the percent deviation from the norm.
                 {this.loadInputForm()}
@@ -115,4 +112,4 @@ class Deviations extends Component {
     }
 }
 
-export default Deviations;
+export default DeviationProjections;

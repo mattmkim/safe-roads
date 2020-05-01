@@ -44,7 +44,7 @@ class CitiesDropDown extends Component {
                 }}>
                     <Select className="select" value={this.state.multiValue} onChange={this.handleMultiChange} options={this.props.options} isMulti={true} />
                     <label style = {{display: "block"}}> Enter your own city</label>
-                    <input style = {{display: "block"}} value={this.state.customCity} onChange={(e) => { this.setState({ customCity: e.target.value }) }} />
+                    <input style = {{display: "block"}} value={this.state.customCity} onChange={(e) => { this.setState({ customCity: e.target.value }) }} pattern = '[A-Z][a-z]+((\s|,\s)[A-Z][a-z]+)*?' />
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

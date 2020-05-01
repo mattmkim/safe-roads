@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Deviations from './Deviations';
 import TimeSeriesProjections from './Projections'
+import DeviationProjections from './DeviationProjections';
 import './Predictions.css'
 class Predictions extends Component {
     state = {
@@ -9,8 +10,10 @@ class Predictions extends Component {
     renderContent() {
         if (this.state.content === "deviations") {
             return <Deviations />
-        } else {
+        } else if (this.state.content === "projection") {
             return <TimeSeriesProjections />
+        } else {
+            return <DeviationProjections/>
         }
     }
     render() {
@@ -30,6 +33,12 @@ class Predictions extends Component {
                             <a onClick={() => { this.setState({ content: 'projection' }) }} className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                 Projections
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick={() => { this.setState({ content: 'deviation projections' }) }} className="nav-link text-dark font-italic bg-light">
+                                <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                Deviation Projections
                             </a>
                         </li>
                     </ul>
