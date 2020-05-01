@@ -5,9 +5,11 @@
 }
 
 .codes-container {
-    margin-top: 30px !important;
-    height: 400px !important;
-    justify-content: center;
+    margin-top: 30px;
+    height: 400px;
+    margin-left: 0px !important;
+    margin: 0px;
+
 }
 
 .quintile-col1 {

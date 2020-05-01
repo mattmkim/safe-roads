@@ -159,17 +159,12 @@ class SharedCodes extends Component {
 
         return (
             <div>
-                <Container className="codes-container">
-                <div class="description" style = {{height: '100%', width: '85%'}}>
-                    <h4 style = {{marginTop: "10px"}}> Description </h4> 
-                    View shared TMC codes among the user selected amounnt of codes from the specified cities. 
-                    <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
-                    Select any number of cities from the dropdown, and specify a positive integer value for the number of codes to display. 
-                </div>
-                    {this.loadInputFormCodes()}
-
-                    {this.loadVisualization()}
-                </Container>
+                <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                View shared TMC codes among the user selected amounnt of codes from the specified cities. 
+                <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                Select any number of cities from the dropdown, and specify a positive integer value for the number of codes to display. 
+                <div style = {{marginTop: '20px'}}>{this.loadInputFormCodes()} </div>
+                {this.loadVisualization()}
             </div>
         )
     }

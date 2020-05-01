@@ -38,7 +38,7 @@ class Quintiles extends Component {
 
     loadBarChart() {
         if (this.state.quintileData.length === 0) {
-            return <div> No Data </div>
+            return <div> </div>
         } else {
             var config = {
                 title: {
