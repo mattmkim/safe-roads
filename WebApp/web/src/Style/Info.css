@@ -20,6 +20,13 @@
     margin-right: 4px;
 }
 
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .form-wrapper {
     margin-top: 45px;
     display: flex;
