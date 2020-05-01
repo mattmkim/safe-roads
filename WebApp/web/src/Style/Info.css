@@ -13,6 +13,11 @@
 .card-wrapper {
     display: inline-flex;
     flex-direction: row;
+    margin-bottom: 50px;
+}
+
+.jumbo {
+    width: 100%;
 }
 
 .cards {
@@ -31,6 +36,13 @@
     margin-top: 45px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lel-wrapper {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }

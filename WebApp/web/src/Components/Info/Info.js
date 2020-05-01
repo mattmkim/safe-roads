@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import {Tab, Row, Col, Nav, Jumbotron, Card, Button, Form, Alert} from 'react-bootstrap'
 import InfoCard from './InfoCard'
+import ProfileCard from './ProfileCard'
 import time from './time.png'
 import options from '../SearchShow/options'
 import prediction from './prediction.png'
 import search from './search.png'
 import feature from './feature.png'
 import Auth from '../../Middleware/Auth'
+import vinke from './vinke.png'
+import kevin from './kevin.png'
+import daniel from './daniel.png'
+import matt from './matt.png'
 import '../../Style/Info.css'
 
 class Info extends Component {
@@ -59,11 +64,19 @@ class Info extends Component {
                     {alert}
                 </div>
                 <div class="content-wrapper">
-                    <Jumbotron>
+                    <Jumbotron className="jumbo">
                         <h1>Welcome to Safe Roads!</h1>
                         <p>
                         Web application for CIS 550 (Databases & Info Systems) final project at the University of Pennsylvania with functionalities for querying and visualizing U.S. accident data with associated weather factors.
                         </p>
+                        <hr></hr>
+                        <div class="lel-wrapper">
+                            <ProfileCard className="lel" title={"Kevin Xu"} info={""} img={vinke}/>
+                            <ProfileCard className="lel" title={"Daniel Kim"} info={""} img={daniel}/>
+                            <ProfileCard className="lel" title={"Kevin Sun"} info={""} img={kevin}/>
+                            <ProfileCard className="lel" title={"Matthew Kim"} info={""} img={matt}/>
+                        </div>
+
 
                     </Jumbotron>
                     <div class="card-wrapper">
