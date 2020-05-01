@@ -1,0 +1,29 @@
+.item {
+    width: 100px !important;
+}
+
+.tabs-title {
+    margin-right: 10px !important;
+}
+
+.col-1 {
+    margin-top: 300px !important;
+}
+
+.card-wrapper {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.cards {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.form-wrapper {
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

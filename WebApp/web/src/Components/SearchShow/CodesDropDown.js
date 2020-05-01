@@ -48,7 +48,7 @@ class CitiesDropDown extends Component {
                 }}> 
                     <Select className="select" value={this.state.multiValue} onChange={this.handleMultiChange} options={this.props.options} isMulti={true} />
                     <Form.Group controlId="numCodes">
-                        <Form.Label>Pick Number of Shared Codes To Display</Form.Label>
+                        <Form.Label>Pick Number of Codes To Display</Form.Label>
                         <Form.Control value={this.state.numCodes} type="numCodes" placeholder="Number of Codes" onChange = {this.handleCodesChange}/>
                     </Form.Group>
                     <button type="submit" class="btn btn-primary">Submit</button>

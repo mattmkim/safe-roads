@@ -1,14 +1,19 @@
+const bcrypt = require('bcryptjs')
+
 var routes = function(User) {
     var checkLogin = function(req, res) {
         var email = req.body.email;
         var password = req.body.password;
 
-        User.find({email: email}, function(err, response) {
+        User.find({email: email}, async function(err, response) {
             if (err) {
                 console.log(err);
             } else {
                 if (response.length != 0) {
-                    if (response[0].password === password) {
+                    console.log(response);
+                    var storedPassword = response[0].password;
+                    const isMatch = await bcrypt.compare(password, storedPassword)
+                    if (isMatch) {
                         console.log("Successful login");
                         res.send("success");
                     } else {
@@ -23,11 +28,11 @@ var routes = function(User) {
         })
     }
 
-    var signup = function(req, res) {
+    var signup = async function(req, res) {
         var firstname = req.body.firstname;
         var lastname = req.body.lastname;
         var email = req.body.email;
-        var password = req.body.password;
+        var password = await bcrypt.hash(req.body.password, 8);
         var favcity = req.body.favcity;
 
         var newUser = new User({
@@ -74,10 +79,44 @@ var routes = function(User) {
         })
     }
 
+    var updateCity = function(req, res) {
+        var email = req.body.email;
+        var city = req.body.favcity;
+
+        User.update({email: email}, {favcity: city}, function(err, response) {
+            if (err) {
+                console.log(err);
+                res.send("error");
+            } else {
+                res.send("success");
+            }
+        })
+    }
+
+    var getFavCity = function(req, res) {
+        var email = req.body.email;
+
+        User.find({email: email}, function(err, response) {
+            if (err) {
+                console.log(err);
+                res.send("error");
+            } else {
+                if (response.length == 0) {
+                    res.send("error");
+                } else {
+                    var city = response[0].favcity;
+                    res.send(city);
+                }
+            }
+        })
+    }
+
     return {
         check_login: checkLogin,
         signup: signup,
-        delete_profile: deleteProfile
+        delete_profile: deleteProfile,
+        update_city: updateCity,
+        get_fav_city: getFavCity
     }
 }
 

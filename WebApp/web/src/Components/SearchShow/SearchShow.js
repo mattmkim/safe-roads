@@ -16,7 +16,7 @@ class SearchShow extends Component {
         return (
             <div>
                 <div className="vertical-nav bg-light" id="sidebar" style = {{float: "left"}}>
-                    <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+                    <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Tabs</p>
                     <ul className="nav flex-column bg-light mb-0">
                         <li className="nav-item">
                             <a onClick = {() => {this.setState({content: 'quintiles'})}}className="nav-link text-dark font-italic bg-light">
@@ -27,7 +27,7 @@ class SearchShow extends Component {
                         <li className="nav-item">
                             <a onClick = {() => {this.setState({content: 'SharedCodes'})}} className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                                SharedCodes
+                                Shared Codes
                             </a>
                         </li>
                     </ul>

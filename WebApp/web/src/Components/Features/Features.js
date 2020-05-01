@@ -128,7 +128,7 @@ class Features extends Component {
                 },
                 description: {
                     visible: true,
-                    text: 'Stacked area chart for understanding city-specific accident/weather features at one glance'
+                    text: 'Grouped bar chart for understanding city-specific accident/weather features at one glance'
                 },
                 forceFit: true,
                 xField: 'date',

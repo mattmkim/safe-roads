@@ -60,7 +60,7 @@ class Signup extends Component {
             console.log("signup sequence");
 
             var objCheckLogin = {email: this.state.email, password: this.state.password};
-            var objSignup = {firstname: this.state.firstname, lastname: this.state.lastname, email: this.state.email, password: this.state.password, username: this.state.username, university: this.state.university};
+            var objSignup = {firstname: this.state.firstname, lastname: this.state.lastname, email: this.state.email, password: this.state.password, favcity: this.state.favcity};
             
             Auth.signup(objSignup, (result) => {
                 if (result === "user exists") {
@@ -110,7 +110,7 @@ class Signup extends Component {
                 <div>
                 {alert}
                 </div>
-                <div class="container">
+                <div class="container-signup">
                     <Container fluid="lg">
                         <h1 class="sign-in"> Sign Up</h1>
                         <div class="card-container">
