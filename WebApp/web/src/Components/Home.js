@@ -128,9 +128,9 @@ class Home extends Component {
                 <Navbar className="navbar" variant="dark">
                     <Navbar.Brand href="/home" className="navbar-title" onClick={() => { this.setState({ currentPage: 'profile' }) }}>Safe Roads</Navbar.Brand>
                     <Nav className="container-fluid">
-                        <Nav.Link className="tabs" onClick={() => { this.setState({currentPage: 'search and show'})}}>Search and Show</Nav.Link>
+                        <Nav.Link className="tabs" onClick={() => { this.setState({currentPage: 'search and show'})}}>City Comparison</Nav.Link>
+                        <Nav.Link className="tabs" onClick={() => { this.setState({ currentPage: 'features'}) }}>City Statistics</Nav.Link>
                         <Nav.Link className="tabs" onClick={() => { this.setState({ currentPage: 'time series' }) }}>Time Series Visualization</Nav.Link>
-                        <Nav.Link className="tabs" onClick={() => { this.setState({ currentPage: 'features'}) }}>Features</Nav.Link>
                         <Nav.Link className="tabs" onClick={() => { this.setState({ currentPage: 'predictions' }) }}>Predictions</Nav.Link>
                         <Nav.Item className="ml-auto">
                             <div className="update-button-container">

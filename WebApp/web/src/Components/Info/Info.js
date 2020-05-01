@@ -79,11 +79,12 @@ class Info extends Component {
 
 
                     </Jumbotron>
+                    <h2> Features </h2>
                     <div class="card-wrapper">
-                        <InfoCard className="cards" title={"Search and Show"} info={"hello"} img={search}/>
-                        <InfoCard className="cards" title={"Time Series"} info={"hello"} img={time}/>
-                        <InfoCard className="cards" title={"Features"} info={"hello"} img={feature}/>
-                        <InfoCard className="cards" title={"Predictions"} info={"hello"} img={prediction}/>
+                        <InfoCard className="cards" title={"City Comparison"} info={"Compare accident data amongst user specified cities."} img={search}/>
+                        <InfoCard className="cards" title={"City Statistics"} info={"Get summary statistics for weather and accident data for cities."} img={feature}/>
+                        <InfoCard className="cards" title={"Time Series"} info={"Understand and visualize trends of accident and weather data over time."} img={time}/>
+                        <InfoCard className="cards" title={"Predictions"} info={"Compare hypothetical data and visualize predicted trends in the future."} img={prediction}/>
                     </div>
                     
                     
