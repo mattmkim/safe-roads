@@ -87,11 +87,11 @@ class Deviations extends Component {
             }}>
                 <div className="form-group">
                     <label>Deviation of Severity</label>
-                    <input type = "number" step = "any" required = "true" max = "1" min = "0" className="form-control" value={this.state.severityDeviation} onChange={(e) => { severityDeviation = e.target.value }} aria-describedby="emailHelp" placeholder="Enter deviation for accident severity" />
+                    <input type = "number" step = "any" required = {true} max = "1" min = "0" className="form-control" value={this.state.severityDeviation} onChange={(e) => { severityDeviation = e.target.value }} aria-describedby="emailHelp" placeholder="Enter deviation for accident severity" />
                 </div>
                 <div className="form-group">
                     <label>Deviation of Rain</label>
-                    <input type = "number" step = "any" required = "true" max = "1" min = "0" className="form-control" value={this.state.rainDeviation} onChange={(e) => { rainDeviation = e.target.value }} placeholder='Enter Deviation for amount rain' />
+                    <input type = "number" step = "any" required = {true} max = "1" min = "0" className="form-control" value={this.state.rainDeviation} onChange={(e) => { rainDeviation = e.target.value }} placeholder='Enter Deviation for amount rain' />
                 </div>
                 <div className="form-group form-check">
                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />

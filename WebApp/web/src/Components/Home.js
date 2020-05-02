@@ -1,4 +1,4 @@
-import React, { Component, useState, setShow } from 'react'
+import React, { Component} from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
@@ -131,7 +131,7 @@ class Home extends Component {
                 <Navbar className="navbar" variant="dark">
                     <Navbar.Brand href="/home" className="navbar-title" onClick={() => { this.setState({ currentPage: 'info' }) }}>Safe Roads</Navbar.Brand>
                     <Nav className="container-fluid">
-                        <Nav.Link classname="tabs" onClick={() => { this.setState({currentPage: 'profile'})}}>Profile</Nav.Link>
+                        <Nav.Link className="tabs" onClick={() => { this.setState({currentPage: 'profile'})}}>Profile</Nav.Link>
                         <Nav.Link className="tabs" onClick={() => { this.setState({currentPage: 'search and show'})}}>City Comparison</Nav.Link>
                         <Nav.Link className="tabs" onClick={() => { this.setState({ currentPage: 'features'}) }}>City Statistics</Nav.Link>
                         <Nav.Link className="tabs" onClick={() => { this.setState({ currentPage: 'time series' }) }}>Time Series Visualization</Nav.Link>
@@ -153,7 +153,7 @@ class Home extends Component {
                                                 })}
                                             </Form.Control>
                                         </Form.Group>
-                                        <div class="button">
+                                        <div className="button">
                                             <Button variant="primary" type="submit">
                                                 Update
                                             </Button>

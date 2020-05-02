@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import CodesDropDown from './CodesDropDown'
 import options from './options';
-import Container from 'react-bootstrap/Container'
-import {Card, Table} from 'react-bootstrap'
+import {Table} from 'react-bootstrap'
 import '../../Style/SearchShow.css'
-import { RoseChart, PieChart } from '@opd/g2plot-react';
+import { RoseChart} from '@opd/g2plot-react';
 
 class SharedCodes extends Component {
 
@@ -36,7 +35,7 @@ class SharedCodes extends Component {
     }
 
     loadVisualization() {
-        if (this.state.codesData.length == 0) {
+        if (this.state.codesData.length === 0) {
             return <div>  </div>
         } else {
             const newData = [];
@@ -61,7 +60,7 @@ class SharedCodes extends Component {
                 if (prevCity === '') {
                     prevCity = city;
                     codes = codes + type + ', ';
-                } else if (i == this.state.codesData.length - 1) {
+                } else if (i === this.state.codesData.length - 1) {
                     codes = codes + type;
                     var obj = {city: city, codes: codes};
                     console.log(obj);

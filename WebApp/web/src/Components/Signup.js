@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Redirect, Link, withRouter} from 'react-router-dom'
 import options from '../Components/SearchShow/options'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
@@ -56,7 +55,7 @@ class Signup extends Component {
     }
 
     checkSignupAttempt() {
-        if (this.state.errorEmail.length == 0 && this.state.errorPassword.length == 0) {
+        if (this.state.errorEmail.length === 0 && this.state.errorPassword.length === 0) {
             console.log("signup sequence");
 
             var objCheckLogin = {email: this.state.email, password: this.state.password};
@@ -86,10 +85,10 @@ class Signup extends Component {
         event.preventDefault();
         var errorEmail = "";
         var errorPassword = "";
-        if (this.state.email.length == 0) {
+        if (this.state.email.length === 0) {
             errorEmail = "Your email cannot be blank.";
         }
-        if (this.state.password.length == 0) {
+        if (this.state.password.length === 0) {
             errorPassword = "Your password cannot be blank.";
         }
 
@@ -101,7 +100,7 @@ class Signup extends Component {
     render() {
         console.log(options);
         let alert;
-        if (this.state.alert.length != 0) {
+        if (this.state.alert.length !== 0) {
             alert = <Alert variant="danger"> {this.state.alert} </Alert>;
         }
 

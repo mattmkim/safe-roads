@@ -24,22 +24,22 @@ class Predictions extends Component {
 
                     <ul className="nav flex-column bg-light mb-0">
                         <li className="nav-item">
-                            <a onClick={() => { this.setState({ content: 'deviations' }) }} className="nav-link text-dark font-italic bg-light">
+                            <div onClick={() => { this.setState({ content: 'deviations' }) }} className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                 Deviations
-                            </a>
+                            </div>
                         </li>
                         <li className="nav-item">
-                            <a onClick={() => { this.setState({ content: 'projection' }) }} className="nav-link text-dark font-italic bg-light">
+                            <div onClick={() => { this.setState({ content: 'projection' }) }} className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                 Projections
-                            </a>
+                            </div>
                         </li>
                         <li className="nav-item">
-                            <a onClick={() => { this.setState({ content: 'deviation projections' }) }} className="nav-link text-dark font-italic bg-light">
+                            <div onClick={() => { this.setState({ content: 'deviation projections' }) }} className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                 Deviation Projections
-                            </a>
+                            </div>
                         </li>
                     </ul>
                 </div>

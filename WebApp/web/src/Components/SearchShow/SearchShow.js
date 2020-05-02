@@ -19,16 +19,16 @@ class SearchShow extends Component {
                     <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Tabs</p>
                     <ul className="nav flex-column bg-light mb-0">
                         <li className="nav-item">
-                            <a onClick = {() => {this.setState({content: 'quintiles'})}}className="nav-link text-dark font-italic bg-light">
+                            <div onClick = {() => {this.setState({content: 'quintiles'})}}className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                 Quintiles
-                            </a>
+                            </div>
                         </li>
                         <li className="nav-item">
-                            <a onClick = {() => {this.setState({content: 'SharedCodes'})}} className="nav-link text-dark font-italic bg-light">
+                            <div onClick = {() => {this.setState({content: 'SharedCodes'})}} className="nav-link text-dark font-italic bg-light">
                                 <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                 Shared Codes
-                            </a>
+                            </div>
                         </li>
                     </ul>
                 </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Card, Button, Image} from 'react-bootstrap'
+import {Card,Image} from 'react-bootstrap'
 import '../../Style/ProfileCard.css'
 
 class ProfileCard extends Component {
@@ -11,7 +11,7 @@ class ProfileCard extends Component {
     render () {
         return (
             <Card bg="light" text="dark" border="dark" className="lel" style={{ width: '18rem' }}>
-                <div class="image-wrapper-prof">
+                <div className="image-wrapper-prof">
                     <Image src={this.props.img} rounded />
                 </div>
                 <Card.Body>

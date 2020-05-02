@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Redirect, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Alert from 'react-bootstrap/Alert'
@@ -33,7 +33,7 @@ class Welcome extends Component {
     }
 
     checkLoginAttempt = () => {
-        if (this.state.errorEmail.length == 0 && this.state.errorPassword.length == 0) {
+        if (this.state.errorEmail.length === 0 && this.state.errorPassword.length === 0) {
             console.log("login sequence");
 
             var obj = {email: this.state.email, password: this.state.password};
@@ -58,10 +58,10 @@ class Welcome extends Component {
         event.preventDefault();
         var errorEmail = "";
         var errorPassword = "";
-        if (this.state.email.length == 0) {
+        if (this.state.email.length === 0) {
             errorEmail = "Your email cannot be blank.";
         }
-        if (this.state.password.length == 0) {
+        if (this.state.password.length === 0) {
             errorPassword = "Your password cannot be blank.";
         }
 
