@@ -8,7 +8,7 @@ class CitiesDropDown extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            multiValue: [],
+            multiValue: [{label: this.props.favcity, value: this.props.favcity}],
             numCodes: ''
         }
 
@@ -49,7 +49,7 @@ class CitiesDropDown extends Component {
                     <Select className="select" value={this.state.multiValue} onChange={this.handleMultiChange} options={this.props.options} isMulti={true} />
                     <Form.Group controlId="numCodes">
                         <Form.Label>Pick Number of Codes To Display</Form.Label>
-                        <Form.Control value={this.state.numCodes} min='0' type="numCodes" placeholder="Number of Codes" onChange = {this.handleCodesChange}/>
+                        <Form.Control pattern="^[1-9]\d*$" value={this.state.numCodes} type="numCodes" placeholder="Number of Codes" onChange = {this.handleCodesChange}/>
                     </Form.Group>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </Form>
