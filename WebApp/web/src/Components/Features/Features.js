@@ -152,7 +152,7 @@ class Features extends Component {
                 <div class="description">
 
                 <h4 style = {{marginTop: "10px"}}> Description </h4> 
-                View the raw data over time for various accident and weather features for a specified city.
+                View the raw data over time for various accident and weather features for a specified city. Accident severity ranges from 1 to 4.
                 </div>
                 <div className="h5">Detailed Statistics for {this.state.city}</div>
                 <div className="features">
@@ -160,8 +160,8 @@ class Features extends Component {
                         <div className="features-header">
                             <div className="header-lg"><strong>Year</strong></div>
                             <div className="header-lg"><strong>Month</strong></div>
-                            <div className="header"><strong>Accident Severity(1-4)</strong></div>
-                            <div className="header"><strong>Temperature (Celsius)</strong></div>
+                            <div className="header"><strong>Accident Severity</strong></div>
+                            <div className="header"><strong>Temperature (°C)</strong></div>
                             <div className="header"><strong>Temperature Range</strong></div>
                             <div className="header-sm"><strong>Humidity</strong></div>
                             <div className="header-sm"><strong>Pressure (kPa)</strong></div>
