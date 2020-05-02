@@ -31,7 +31,7 @@ class Quintiles extends Component {
         return (
             <div>
                 <label>Pick Cities For Quintile</label>
-                <DropDown options={options} handleSubmit={this.handleSubmitQuintile} />
+                <DropDown options={options} handleSubmit={this.handleSubmitQuintile} favcity={this.props.favcity}/>
             </div>
         )
     }

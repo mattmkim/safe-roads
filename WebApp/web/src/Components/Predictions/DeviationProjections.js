@@ -30,7 +30,6 @@ class DeviationProjections extends Component {
         if (this.state.data.length === 0) {
             return <div> Loading </div>
         } else {
-            console.log(this.state);
             var config = {
                 height: 400,
                 title: {
@@ -71,19 +70,23 @@ class DeviationProjections extends Component {
                 },
                 data: this.state.data,
             }
-            console.log(config);
             return <div style = {{width: "100%"}}><ScatterChart {...config} /> </div> 
         }
     }
     // this doesn't actually work lmao
     loadInputForm() {
         return <div style = {{marginTop: "20px"}}>
-            <form onSubmit={(e) => {
+            <form onSubmit={async (e) => {
                 // need to rework this logic to include the predictions api. Major reworking needed
                 e.preventDefault();
                 const val1 = parseFloat(rainDeviation)
                 // this is for compiling
-                const val2 = 2
+                const obj = {
+                    input: val1
+                }
+                const response = await axios.post('/api/testRegressionDeviations', obj);
+                // test this
+                const val2 = response.data[1] || .20 
                 this.setState({ raindeviation: val1, data: [...this.state.data, { city: "Your entry", raindeviation: parseFloat(rainDeviation), severitydeviation: val2 }] })
             }}>
                 <div className="form-group">

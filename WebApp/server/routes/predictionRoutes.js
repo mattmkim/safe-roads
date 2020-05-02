@@ -26,7 +26,7 @@ module.exports = function (database) {
     };
     // right now only works for temperature range
     response.runPredictionModel = async function (req, res) {
-        console.log('prediction model for temperature range')
+        console.log('Running backend projection model for ' + req.body.attribute.label + ' in the city ' + req.body.city);
         var city = req.body.city;
         var attribute = req.body.attribute.label;
         let query = `SELECT feats.Year year, feats.Month month, AVG(feats.tmp) temp_avg, AVG(feats.tmpdiff) temp_range, AVG(feats.hu) humidity, AVG(feats.pr) pressure, AVG(feats.ws) wind_speed, AVG(feats.severity) severity
@@ -42,14 +42,12 @@ module.exports = function (database) {
         GROUP BY feats.Year, feats.Month
         ORDER BY feats.Year, feats.Month`;
         var response = await database.execute(query);
-        console.log(attribute);
         // preprocess data
-        var data = response.rows.map((data) => {console.log(data);return {isProjection: "not projection", attr: data[attribute], date: new Date(data.YEAR, data.MONTH) } })
+        var data = response.rows.map((data) => {return {isProjection: "not projection", attr: data[attribute], date: new Date(data.YEAR, data.MONTH) } })
         var t = new timeseries.main(timeseries.adapter.fromDB(data, {
             date: 'date',     // Name of the property containing the Date (must be compatible with new Date(date) )
             value: 'attr'     // Name of the property containign the value.
         }));
-        console.log(data);
         const initData = data;
         // get forecast value for next few dates
         var forecasts = [] 
@@ -73,6 +71,7 @@ module.exports = function (database) {
         }
         var results = [...initData, ...forecasts];
         // console.log(results);
+        console.log("successfully did projection")
         res.send(results);
     }
     let weatherAccidentQuery = `WITH severity (city, deviation) AS (SELECT acc_av.city as city, acc_av.average as deviation
@@ -101,21 +100,21 @@ module.exports = function (database) {
         CROSS JOIN humidityAverage        
         `
     response.getWeatherAccidentDeviations = async function (req, res) {
-        console.log("called weather accident deviations. I.e query number 1 ");
+        console.log("called weather accident deviations default");
         let query = weatherAccidentQuery;
         const response = await database.execute(query);
         res.send(response)
     }
     response.getWeatherAccidentRegressions = async function (req, res) {
-        console.log("called weather accident regressions");
+        console.log("called weather accident regressions for base line value of " + req.body.input);
         let query = weatherAccidentQuery;
         const response = await database.execute(query);
         const data = response.rows.map((data) => {return [data.RAINDEVIATION, data.SERVERITYDEVIATION]});
-        console.log(data);
         const result = regression.polynomial(data, { order: 3});
-        const equation = result.predict(2.3123)
-        console.log(equation);
-        res.end();
+        const val = req.body.input
+        const answer = result.predict(val);
+        console.log(answer);
+        res.send(answer);
         // add the regression framework in
     }
 

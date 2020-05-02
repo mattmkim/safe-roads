@@ -8,7 +8,7 @@ class CitiesDropDown extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            multiValue: [],
+            multiValue: [{label: this.props.favcity, value: this.props.favcity}],
             customCity: ''
         }
 
@@ -26,6 +26,7 @@ class CitiesDropDown extends Component {
     }
 
     render() {
+        console.log(this.state);
         return (
             <div>
                 <form onSubmit={async (e) => {

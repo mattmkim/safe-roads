@@ -7,7 +7,7 @@ class SearchShow extends Component {
     }
     renderContent() {
         if(this.state.content === "quintiles") {
-           return <Quintiles/>
+           return <Quintiles favcity={this.props.favcity}/>
         } else {
             return <SharedCodes/>
         }

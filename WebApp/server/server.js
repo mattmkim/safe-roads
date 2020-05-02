@@ -26,6 +26,7 @@ var routes_city = require('./routes/cityRoutes.js')(database);
 var predictionRoutes = require('./routes/predictionRoutes')(database);
 var searchShowRoutes = require('./routes/searchShowRoutes')(database);
 var timeSeriesRoutes = require('./routes/timeSeriesRoutes')(database);
+var weatherRoutes = require('./routes/weatherRoutes')();
 
 // route handling
 app.post('/api/checklogin/', authRoutes.check_login);
@@ -46,8 +47,8 @@ app.get('/api/timeSeries', timeSeriesRoutes.getTimeSeriesQuery);
 app.get('/api/timeSeries/:city', timeSeriesRoutes.getTimeSeriesQueryCity);
 app.get('/api/timeSeriesKill', timeSeriesRoutes.getTimeSeriesKill);
 app.post('/api/testTimeSeries', predictionRoutes.runPredictionModel);
-app.get('/api/testRegressionDeviations', predictionRoutes.getWeatherAccidentRegressions);
-
+app.post('/api/testRegressionDeviations', predictionRoutes.getWeatherAccidentRegressions);
+app.post('/api/testLiveWeather', weatherRoutes.getLiveWeatherUpdates);
 const listener = app.listen(5000);
 // incase control c is not working some weird stuff
 process.on('SIGINT', () => {

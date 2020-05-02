@@ -12,6 +12,7 @@
     "oracledb": "github:oracle/node-oracledb#v4.2.0",
     "react-bootstrap": "^1.0.1",
     "regression": "^2.0.1",
+    "request": "^2.88.2",
     "timeseries-analysis": "^1.0.12"
   },
   "devDependencies": {},
