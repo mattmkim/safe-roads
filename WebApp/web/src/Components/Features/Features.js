@@ -31,7 +31,7 @@ class Features extends Component {
             let cityDivs = cityList.map((data) => { return { value: `${data.CITY}`, label: `${data.CITY}` } });
             let statDivs = statList.map((stat_) => <FeatureButton id={"button-" + stat_} onClick={() => this.setState({ stat: stat_ })} feature={stat_} />)
             this.setState({
-                city: this.props.favcity,
+                city: this.props.favcity || '',
                 cities: cityDivs,
                 stat: 'severity',
                 stats: statDivs

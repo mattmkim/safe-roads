@@ -43,7 +43,7 @@ class Quintiles extends Component {
             var config = {
                 title: {
                     visible: true,
-                    text: 'Test for Quintile Data',
+                    text: 'Quintile Data',
                 },
                 data: this.state.quintileData,
                 xField: 'RANK',

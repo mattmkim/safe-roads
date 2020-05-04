@@ -152,12 +152,7 @@ class Home extends Component {
                                                     return <option key = {key} value={e.value}> {e.value} </option>
                                                 })}
                                             </Form.Control>
-                                        </Form.Group>
-                                        <div className="button">
-                                            <Button variant="primary" type="submit">
-                                                Update
-                                            </Button>
-                                        </div>
+                                        </Form.Group> 
                                     </Form>
                                     </Modal.Body>
                                     <Modal.Footer>

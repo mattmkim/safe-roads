@@ -15,7 +15,7 @@ class Projections extends Component {
             title: "Loading",
             data: [],
             cities: [],
-            selectAttribute: 'TEMP_RANGE',
+            selectAttribute: {value: 'TEMP_RANGE', label: 'TEMP_RANGE'},
             selectCity: { value: 'San Diego', label: 'San Diego' }
         }
         this.loadLinePlot = this.loadLinePlot.bind(this);
@@ -45,11 +45,11 @@ class Projections extends Component {
                 height: 400,
                 title: {
                     visible: true,
-                    text: 'Test graph for Predictions of projections',
+                    text: 'Projections for ' + this.state.selectAttribute.value + ' in ' + this.state.selectCity.label,
                 },
                 description: {
                     visible: true,
-                    text: 'Test graph for predictions of projections',
+                    text: 'Plot over time, everything past 2018 is projected',
                 },
                 padding: 'auto',
                 forceFit: true,
