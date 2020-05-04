@@ -1,0 +1,36 @@
+{
+  "name": "WebApp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.10",
+    "oracledb": "github:oracle/node-oracledb#v4.2.0",
+    "react-bootstrap": "^1.0.1",
+    "regression": "^2.0.1",
+    "request": "^2.88.2",
+    "timeseries-analysis": "^1.0.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "start": "node server.js",
+    "server": "nodemon server",
+    "client": "cd client && react-scripts start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "14.0.0"
+  }
+}

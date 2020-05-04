@@ -14,8 +14,9 @@ Add paths (locally or to zshrc/bashrc):
 
 ## Instructions for Running the Web App
 * Step 1: Navigate to the Webapp folder 
-* Step 2: Navigate to the web folder and run `npm install` and `npm start`
-* Step 3: Navigate to the server folder and run `npm install` and `node server.js`
+* Step 2: To run the above 2 commands concurrently (in development only) run `npm run dev`
+* Step 2.1: Navigate to the web folder and run `npm install` and `npm start`
+* Step 2.2: Navigate to the server folder and run `npm install` and `node server.js`
 
 ## Instructions for how to run your queries. 
 * Step 1: Navigate to the corresponding routes folder and make a new routes.js file. 
@@ -27,3 +28,4 @@ Add paths (locally or to zshrc/bashrc):
 * After calling a db command, quitting the server.js file takes a while with control c. Run server.js
 * Make sure your queries use a backtik and not a quotation mark. 
 * Look at testRoutes as an example for how to write routes
+* When query has SQL syntax error have to restart server.
