@@ -14,6 +14,7 @@ database.initialization().then((res)=> {
 
   var mongoose = require("mongoose");
   var uri = process.env.ATLAS_URI;
+  //var uri = "mongodb+srv://mattkim:minwoo123@cluster0-un1ah.mongodb.net/test?retryWrites=true&w=majority";
   mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
   mongoose.connection.on('connected', function() {
       console.log("connected to mongo db instance");
