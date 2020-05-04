@@ -57,7 +57,6 @@ class Home extends Component {
             if (result === "success") {
                 this.setState({
                     validUpdate: "valid",
-                    favcity: '',
                     showModal: false
                 })
             } else {
