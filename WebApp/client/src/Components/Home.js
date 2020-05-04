@@ -153,6 +153,11 @@ class Home extends Component {
                                                 })}
                                             </Form.Control>
                                         </Form.Group> 
+                                        <div class="button">
+                                            <Button variant="primary" type="submit">
+                                                Update
+                                            </Button>
+                                        </div>
                                     </Form>
                                     </Modal.Body>
                                     <Modal.Footer>
