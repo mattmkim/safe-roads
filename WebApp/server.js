@@ -58,14 +58,6 @@ app.post('/api/testTimeSeries', predictionRoutes.runPredictionModel);
 app.post('/api/testRegressionDeviations', predictionRoutes.getWeatherAccidentRegressions);
 app.post('/api/testLiveWeather', weatherRoutes.getLiveWeatherUpdates);
 
-// const listener = app.listen(5000);
-// // incase control c is not working some weird stuff
-// process.on('SIGINT', () => {
-//   listener.close(() => {
-//       process.exit(0)
-//   })
-// })
-
 // other app.use middleware : Static file declaration
 app.use(express.static(path.join(__dirname, "client", "build")))
 
@@ -77,6 +69,13 @@ app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 })
 
-app.listen(port, () => {
+const listener = app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
+
+// incase control c is not working some weird stuff
+process.on('SIGINT', () => {
+  listener.close(() => {
+      process.exit(0)
+  })
+})
