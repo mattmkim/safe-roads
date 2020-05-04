@@ -49,8 +49,8 @@ class TimeSeries extends Component {
         const response = await axios.get('/api/timeSeries/' + input_city)
         if (response.data) {
             var featureList = response.data.rows;
-            let featureDivs = featureList.map((feature) => <TimeSeriesRow year={feature.YEAR} month={feature.MONTH} id={feature.ID} time={feature.TIME} cum_severity={feature.CUM_SEVERITY} cum_accidents={feature.CUM_ACCIDENTS}/>);
-            let datarows = featureList.map((row) => { return { year: row.YEAR, month: row.MONTH, time: row.TIME, cum_severity: row.CUM_SEVERITY, cum_accidents: row.CUM_ACCIDENTS } });
+            let featureDivs = featureList.map((feature) => <TimeSeriesRow year={feature.YEAR} month={feature.MONTH} id={feature.ID} time={feature.TIME} severity={feature.SEVERITY} accidents={feature.ACCIDENTS} cum_severity={feature.CUM_SEVERITY} cum_accidents={feature.CUM_ACCIDENTS}/>);
+            let datarows = featureList.map((row) => { return { year: row.YEAR, month: row.MONTH, time: row.TIME, severity: row.SEVERITY, accidents: row.ACCIDENTS, cum_severity: row.CUM_SEVERITY, cum_accidents: row.CUM_ACCIDENTS } });
             this.setState({
                 features: featureDivs,
                 data: datarows
@@ -115,8 +115,10 @@ class TimeSeries extends Component {
                         <div className="time-series-header">
                             <div className="header-lg"><strong>Year</strong></div>
                             <div className="header-lg"><strong>Month</strong></div>
-                            <div className="header"><strong>Id</strong></div>
-                            <div className="header"><strong>Time</strong></div>
+                            {/* <div className="header"><strong>Id</strong></div>
+                            <div className="header"><strong>Time</strong></div> */}
+                            <div className="header"><strong>Average Accident Severity(1-4)</strong></div>
+                            <div className="header"><strong>Number of Accidents</strong></div>
                             <div className="header"><strong>Cumulative Average Accident Severity(1-4)</strong></div>
                             <div className="header"><strong>Cumulative Number of Accidents</strong></div>
                         </div>
