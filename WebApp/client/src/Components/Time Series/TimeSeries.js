@@ -8,6 +8,13 @@ import '../../Style/TimeSeries.css';
 // TODO: predictive stuff for timeseries
 // TODO: room for optimization for table self join for cumulative
 
+// One of the last ways we have seen people calculate a running total is by using a subquery in the select statement. 
+// This has some similarities to a self join, except the self join occurs inside of the select statement. 
+// This is usually unadvised because using this method typically forces the query to scan the table for 
+// every row that exists in the original table all over again.
+
+// Another option to solve the running total problem is to use a self join. A self join refers to joining a table to itself. 
+
 class TimeSeries extends Component {
     constructor(props) {
         super(props);
@@ -85,6 +92,12 @@ class TimeSeries extends Component {
                 },
                 xAxis: {
                     tickCount: 10,
+                    label: {
+                        formatter: (v) => Math.floor(v/12).toString() + "-" + (v%12).toString(),
+                      },
+                },
+                yAxis: {
+                    
                 },
                 data: this.state.data,
             }
@@ -120,6 +133,9 @@ class TimeSeries extends Component {
                 },
                 xAxis: {
                     tickCount: 10,
+                    label: {
+                        formatter: (v) => Math.floor(v/12).toString() + "-" + (v%12).toString(),
+                      },
                 },
                 data: this.state.data,
             }
@@ -155,6 +171,9 @@ class TimeSeries extends Component {
                 },
                 xAxis: {
                     tickCount: 10,
+                    label: {
+                        formatter: (v) => Math.floor(v/12).toString() + "-" + (v%12).toString(),
+                      },
                 },
                 data: this.state.data,
             }
@@ -190,6 +209,9 @@ class TimeSeries extends Component {
                 },
                 xAxis: {
                     tickCount: 10,
+                    label: {
+                        formatter: (v) => Math.floor(v/12).toString() + "-" + (v%12).toString(),
+                      },
                 },
                 data: this.state.data,
             }
@@ -231,7 +253,7 @@ class TimeSeries extends Component {
 
                     <div class="description">
                     <h4 style = {{marginTop: "10px"}}> Description </h4> 
-                View the raw accident data over time for for a specified city. Accident severity ranges from 1 to 4. The x-axis is 12*year+month.
+                View the raw accident data over time for for a specified city. Accident severity ranges from 1 to 4.
                 <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
                 Select a city to observe.
                 <div style = {{marginTop: '20px'}}></div>
@@ -272,7 +294,7 @@ class TimeSeries extends Component {
 
                     <div class="description">
                     <h4 style = {{marginTop: "10px"}}> Description </h4> 
-                    View accident data over time for for a specified city. Accident severity ranges from 1 to 4. The x-axis is 12*year+month.
+                    View accident data over time for for a specified city. Accident severity ranges from 1 to 4.
                 <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
                 Select a city to observe.
                 <div style = {{marginTop: '20px'}}></div>
