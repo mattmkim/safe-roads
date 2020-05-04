@@ -25,6 +25,8 @@ Add paths (locally or to zshrc/bashrc):
 
 ## Instruction for Deployment
 * `git subtree push --prefix WebApp heroku master`
+* remove `oracledb` from `package.json`
+* heroku buildpacks:add https://github.com/pupostd/heroku-buildpack-nodejs-oracledb.git [ -a APP_NAME ]
 
 ## Known bugs and how to prevent
 * After calling a db command, quitting the server.js file takes a while with control c. Run server.js
