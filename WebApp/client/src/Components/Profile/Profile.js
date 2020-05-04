@@ -20,8 +20,12 @@ class Profile extends Component {
         const main = jsonResponse.main;
         const wind = jsonResponse.wind;
         const sys = jsonResponse.sys;
-        const rain = jsonResponse.rain;
-        console.log(rain);
+        let rain = jsonResponse.rain;
+        if(!rain) {
+            rain = "no rain"
+        } else {
+            rain = rain["1h"] + "mm"
+        }
         var sunrise = new Date(sys.sunrise * 1000);
         var sunriseString = sunrise.toLocaleTimeString();
         var sunset = new Date(sys.sunset * 1000);
@@ -39,7 +43,7 @@ class Profile extends Component {
             sunrise: sunriseString,
             sunset: sunsetString,
             pressure: main.pressure,
-            rain: rain["1h"]
+            rain: rain
         })
     }
     render() {
@@ -64,7 +68,7 @@ class Profile extends Component {
                             <ListGroup.Item>Pressure: {this.state.pressure} hPa</ListGroup.Item>
                             <ListGroup.Item>Wind Speed: {this.state.windspeed} m/s</ListGroup.Item>
                             <ListGroup.Item>Wind Direction: {this.state.winddirection}&deg;</ListGroup.Item>
-                            <ListGroup.Item>Rain Volume, Past Hour: {this.state.rain} mm</ListGroup.Item>
+                            <ListGroup.Item>Rain Volume, Past Hour: {this.state.rain}</ListGroup.Item>
                             {/* <ListGroup.Item>Sunrise: {this.state.sunrise} EDT</ListGroup.Item>
                             <ListGroup.Item>Sunset: {this.state.sunset} EDT</ListGroup.Item> */}
                         </ListGroup>
