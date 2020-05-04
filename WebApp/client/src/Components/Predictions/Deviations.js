@@ -36,11 +36,11 @@ class Deviations extends Component {
                 height: 400,
                 title: {
                     visible: true,
-                    text: 'Test graph for Predictions',
+                    text: 'Rain Deviations vs. Accident Frequency Deviations Graph'
                 },
                 description: {
                     visible: true,
-                    text: 'Test graph for predictions',
+                    text: 'Compare the deviation from the average in the two attributes',
                 },
                 padding: 'auto',
                 forceFit: true,

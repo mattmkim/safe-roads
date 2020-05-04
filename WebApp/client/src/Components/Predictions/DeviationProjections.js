@@ -34,11 +34,11 @@ class DeviationProjections extends Component {
                 height: 400,
                 title: {
                     visible: true,
-                    text: 'Test graph for Predictions',
+                    text: 'Regression Model for Deviations',
                 },
                 description: {
                     visible: true,
-                    text: 'Test graph for predictions',
+                    text: 'Graph that inputs regressions for rain deviation estimates',
                 },
                 padding: 'auto',
                 forceFit: true,

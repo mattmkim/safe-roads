@@ -8,7 +8,8 @@ class CitiesDropDown extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            multiValue: [{label: this.props.favcity, value: this.props.favcity}],
+            multiValue: [{label: this.props.favcity || 'Philadelphia', value: this.props.favcity || 
+        'Philadelphia'}],
             customCity: ''
         }
 
