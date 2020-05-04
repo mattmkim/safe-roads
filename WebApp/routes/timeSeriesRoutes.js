@@ -23,8 +23,17 @@ module.exports = function(database) {
             GROUP BY A.year, A.month
             ORDER BY A.year, A.month
         )
-        SELECT (FLOOR(Temp.time/12)) AS year, MOD(Temp.time,12) AS month, Temp.id AS id, Temp.time AS time, Temp.avg_severity AS severity, Temp.num_accidents AS accidents, Temp.avg_severity AS cum_severity, Temp.num_accidents AS cum_accidents
-        FROM Temp
+        SELECT (FLOOR(Cum.time/12)) AS year, MOD(Cum.time,12) AS month, Cum.id AS id, Cum.time AS time, Cum.avg_severity AS severity, Cum.num_accidents AS accidents, Cum.cum_severity AS cum_severity, Cum.cum_accidents AS cum_accidents
+        FROM (
+            SELECT Temp.time as time, Temp.id as id, Temp.avg_severity AS avg_severity, Temp.num_accidents AS num_accidents, 
+            (
+                SELECT SUM(avg_severity) FROM Temp t2 where Temp.time>=t2.time
+            ) AS cum_severity, 
+            (
+                SELECT SUM(num_accidents) FROM Temp t2 where Temp.time>=t2.time
+            ) AS cum_accidents
+            FROM Temp
+        ) Cum
         `;
         // SELECT (Cumulative.time1/12) AS year, (Cumulative.time1%12) AS month, Cumulative.id AS id, Cumulative.time1 AS time, SUM(Cumulative.avg_severity1) AS cum_severity, SUM(Cumulative.num_accidents1) AS cum_accidents
         // FROM (
