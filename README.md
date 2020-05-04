@@ -23,6 +23,8 @@ Add paths (locally or to zshrc/bashrc):
 * Step 2: Make the new routes file a requirement in server.js and pass in the initialized db instance
 * Step 3: Call db.execute with your queries
 
+## Instruction for Deployment
+* `git subtree push --prefix WebApp heroku master`
 
 ## Known bugs and how to prevent
 * After calling a db command, quitting the server.js file takes a while with control c. Run server.js
