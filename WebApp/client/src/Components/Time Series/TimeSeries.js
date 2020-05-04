@@ -6,14 +6,7 @@ import TimeSeriesRow from './TimeSeriesRow';
 import '../../Style/TimeSeries.css';
 
 //TODO: fix cumulative
-// TODO: use bootstrap/tabs like others, 
-// TODO: put navbar on side, explain what current city Philadelphia means, make table look better
-// TODO: predictive stuff for timesires
-// TODO: todo merge with Daniel page
-// TODO: hosting
-//TODO: use favcity: this.props.favcity || ‘Philadelphia ‘
-
-//update readme to use nodemon
+// TODO: predictive stuff for timeseries
 
 class TimeSeries extends Component {
     constructor(props) {
@@ -22,7 +15,8 @@ class TimeSeries extends Component {
             city: [],
             cities: [],
             features: [],
-            data: []
+            data: [],
+            content: 'default'
         }
 
         this.showFeatures = this.showFeatures.bind(this);
@@ -38,7 +32,7 @@ class TimeSeries extends Component {
             var cityList = response.data.rows;
             let cityDivs = cityList.map((data) => {return {value: `${data.CITY}`, label: `${data.CITY}`}});
             this.setState({
-                city: 'Philadelphia',
+                city: this.props.favcity || 'Philadelphia',
                 cities: cityDivs
             });
             this.showFeatures(this.state.city);
@@ -203,41 +197,133 @@ class TimeSeries extends Component {
         }
     }
 
-    render() {
-        const {city} = this.state;
+    renderContent() {
+        if (this.state.content === "cumulative") {
         return (
-            <div className="time-series-page">
-                <div className="time-series-cities">
-                    <div className="container">
-                        <div className="h3">Accident Time Series for U.S. Cities</div>
-                        <div className="time-series-cities-container">
-                            <Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false}/>
-                        </div>
-                        <div className="h5">Current city: {this.state.city}</div>
+            <div>
+                
+
+                    <div class="description">
+                    <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                    View cumulative accident data over time for for a specified city. Accident severity ranges from 1 to 4.
+                <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                Select a city to observe.
+                <div style = {{marginTop: '20px'}}></div>
                     </div>
-                </div>
+
+    
+                        <div className="h3">Accident Time Series for U.S. Cities</div>
+                            <Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false}/>
+                        <div className="h5">Current city: {this.state.city}</div>
+                    
+    
                 <br></br>
-                {this.loadTimeSeriesSeverity()}
-                {this.loadTimeSeriesAccidents()}
                 {this.loadTimeSeriesCumSeverity()}
                 {this.loadTimeSeriesCumAccidents()}
+            </div>
+        )
+    }
+    else if (this.state.content === "table") {
+        return (
+            <div>
+    
+                    
+
+                    <div class="description">
+                    <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                View the raw accident data over time for for a specified city. Accident severity ranges from 1 to 4.
+                <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                Select a city to observe.
+                <div style = {{marginTop: '20px'}}></div>
+                    </div>
+
+                        <div className="h3">Accident Time Series for U.S. Cities</div>
+                            <Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false}/>
+                        <div className="h5">Current city: {this.state.city}</div>
+                    
+  
                 <br></br>
-                <div className="time-series">
-                    <div className="time-series-container">
-                        <div className="time-series-header">
+
+     
+                    <div className="time-series-table-container">
+                        <div className="time-series-table-header">
                             <div className="header-lg"><strong>Year</strong></div>
                             <div className="header-lg"><strong>Month</strong></div>
                             {/* <div className="header"><strong>Id</strong></div>
                             <div className="header"><strong>Time</strong></div> */}
-                            <div className="header"><strong>Average Accident Severity(1-4)</strong></div>
-                            <div className="header"><strong>Number of Accidents</strong></div>
-                            <div className="header"><strong>Cumulative Average Accident Severity(1-4)</strong></div>
-                            <div className="header"><strong>Cumulative Number of Accidents</strong></div>
+                            <div className="header"><strong>Avg Accident Severity</strong></div>
+                            <div className="header"><strong>Num Accidents</strong></div>
+                            <div className="header-sm"><strong>Cum Avg Accident Severity</strong></div>
+                            <div className="header-sm"><strong>Cum Num of Accidents</strong></div>
                         </div>
                         <div className="time-series-results-container" id="time-series-results">
                             {this.state.features}
                         </div>
                     </div>
+                </div>
+     
+        )
+    }
+   else {
+        return (
+            <div className="time-series-page">
+  
+                   
+
+                    <div class="description">
+                    <h4 style = {{marginTop: "10px"}}> Description </h4> 
+                    View accident data over time for for a specified city. Accident severity ranges from 1 to 4.
+                <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
+                Select a city to observe.
+                <div style = {{marginTop: '20px'}}></div>
+                    </div>
+
+
+                        <div className="h3">Accident Time Series for U.S. Cities</div>
+                        <Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false}/>
+                        <div className="h5">Current city: {this.state.city}</div>
+                  
+       
+                <br></br>
+                {this.loadTimeSeriesSeverity()}
+                {this.loadTimeSeriesAccidents()}
+            </div>
+        )
+    }
+
+
+    }
+
+    render() {
+        return (
+
+            <div>
+                <div className="vertical-nav bg-light" id="sidebar" style={{ float: "left" }}>
+                    <p className="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Tabs</p>
+
+                    <ul className="nav flex-column bg-light mb-0">
+                        <li className="nav-item">
+                            <a onClick={() => { this.setState({ content: 'default' }) }} className="nav-link text-dark font-italic bg-light">
+                                <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                Accidents
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick={() => { this.setState({ content: 'cumulative' }) }} className="nav-link text-dark font-italic bg-light">
+                                <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                Cumulative
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick={() => { this.setState({ content: 'table' }) }} className="nav-link text-dark font-italic bg-light">
+                                <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                Data Table
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div style = {{marginLeft: '17rem', marginTop: '30px'}}>
+                {this.renderContent()}
                 </div>
             </div>
         )

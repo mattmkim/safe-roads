@@ -24,8 +24,11 @@ Add paths (locally or to zshrc/bashrc):
 * Step 3: Call db.execute with your queries
 
 ## Instruction for Deployment
-* `git subtree push --prefix WebApp heroku master`
+1.  `git subtree push --prefix WebApp heroku master`
+2. https://github.com/pupostd/heroku-buildpack-nodejs-oracledb
 * remove `oracledb` from `package.json`
+* Create `Aptfile` with contents `libaio1`
+* heroku buildpacks:add https://github.com/heroku/heroku-buildpack-apt.git -a cis550-final-project-s20-26
 * heroku buildpacks:add https://github.com/pupostd/heroku-buildpack-nodejs-oracledb.git -a cis550-final-project-s20-26
 
 ## Known bugs and how to prevent
