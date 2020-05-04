@@ -5,6 +5,16 @@ import { LineChart } from '@opd/g2plot-react';
 import TimeSeriesRow from './TimeSeriesRow';
 import '../../Style/TimeSeries.css';
 
+//TODO: fix cumulative
+// TODO: use bootstrap/tabs like others, 
+// TODO: put navbar on side, explain what current city Philadelphia means, make table look better
+// TODO: predictive stuff for timesires
+// TODO: todo merge with Daniel page
+// TODO: hosting
+//TODO: use favcity: this.props.favcity || ‘Philadelphia ‘
+
+//update readme to use nodemon
+
 class TimeSeries extends Component {
     constructor(props) {
         super(props);

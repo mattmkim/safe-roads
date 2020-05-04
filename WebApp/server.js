@@ -2,12 +2,19 @@
 var express = require('express');
 var app = express();
 const cors = require('cors');
+
+const path = require('path');
+require('dotenv').config({ path: '.env' });
+const port = process.env.PORT || 5000;
+
 const bodyParser = require('body-parser');
 const database = require('./oracle-db');
 database.initialization();
+
+
 var mongoose = require("mongoose");
-var uri = "mongodb+srv://mattkim:minwoo123@cluster0-un1ah.mongodb.net/test?retryWrites=true&w=majority"
-mongoose.connect(uri);
+var uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 mongoose.connection.on('connected', function() {
     console.log("connected to mongo db instance");
 });
@@ -15,6 +22,7 @@ mongoose.connection.on('connected', function() {
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// app.use(express.json());
 
 //define models
 var User = require('./models/user');
@@ -49,12 +57,26 @@ app.get('/api/timeSeriesKill', timeSeriesRoutes.getTimeSeriesKill);
 app.post('/api/testTimeSeries', predictionRoutes.runPredictionModel);
 app.post('/api/testRegressionDeviations', predictionRoutes.getWeatherAccidentRegressions);
 app.post('/api/testLiveWeather', weatherRoutes.getLiveWeatherUpdates);
-const listener = app.listen(5000);
-// incase control c is not working some weird stuff
-process.on('SIGINT', () => {
-  listener.close(() => {
-      process.exit(0)
-  })
+
+// const listener = app.listen(5000);
+// // incase control c is not working some weird stuff
+// process.on('SIGINT', () => {
+//   listener.close(() => {
+//       process.exit(0)
+//   })
+// })
+
+// other app.use middleware : Static file declaration
+app.use(express.static(path.join(__dirname, "client", "build")))
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 })
-// Models
-console.log('Server running on port 5000');
+
+app.listen(port, () => {
+    console.log(`Server is running on port: ${port}`);
+});

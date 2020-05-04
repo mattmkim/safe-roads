@@ -27,3 +27,4 @@ Add paths (locally or to zshrc/bashrc):
 * After calling a db command, quitting the server.js file takes a while with control c. Run server.js
 * Make sure your queries use a backtik and not a quotation mark. 
 * Look at testRoutes as an example for how to write routes
+* When query has SQL syntax error have to restart server.
