@@ -29,7 +29,7 @@ class SharedCodes extends Component {
         return (
             <div>
                 <label>Pick Cities For Shared Codes</label>
-                <CodesDropDown options={options} handleSubmit={this.handleSubmitCodes}/>
+                <CodesDropDown options={options} handleSubmit={this.handleSubmitCodes} favcity={this.props.favcity}/>
             </div>
         )
     }
@@ -60,14 +60,33 @@ class SharedCodes extends Component {
                 if (prevCity === '') {
                     prevCity = city;
                     codes = codes + type + ', ';
+                    numCodes = parseInt(numCodes) + 1;
+                    if (this.state.codesData.length == 1) {
+                        codes = codes.substring(0, codes.length - 2);
+                        var obj = {city: prevCity, codes: codes};
+                        tabledata.push(obj);
+                        console.log(obj);
+                    }
                 } else if (i === this.state.codesData.length - 1) {
-                    codes = codes + type;
-                    var obj = {city: city, codes: codes};
-                    console.log(obj);
-                    tabledata.push(obj);
+                    if (prevCity === city) {
+                        codes = codes + type;
+                        var obj = {city: city, codes: codes};
+                        console.log(obj);
+                        tabledata.push(obj);
+                    } else {
+                        codes = codes.substring(0, codes.length - 2);
+                        var obj = {city: prevCity, codes: codes};
+                        tabledata.push(obj);
+                        codes = '';
+                        codes = codes + type;
+                        var obj2 = {city: city, codes: codes};
+                        tabledata.push(obj2);
+                    }
+                    
                 } else {
                     if (prevCity === city) {
                         codes = codes + type + ', ';
+                        numCodes = parseInt(numCodes) + 1;
                     } else {
                         codes = codes.substring(0, codes.length - 2);
                         var obj = {city: prevCity, codes: codes};
@@ -75,6 +94,7 @@ class SharedCodes extends Component {
                         console.log(obj);
                         codes = '';
                         codes = codes + type + ', ';
+                        numCodes = parseInt(numCodes) + 1;
                         prevCity = city;
                     }
                 }

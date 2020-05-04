@@ -9,7 +9,7 @@ class SearchShow extends Component {
         if(this.state.content === "quintiles") {
            return <Quintiles favcity={this.props.favcity}/>
         } else {
-            return <SharedCodes/>
+            return <SharedCodes favcity={this.props.favcity}/>
         }
     }
     render() {

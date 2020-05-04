@@ -11,7 +11,7 @@ export default class FeatureButton extends React.Component {
         if (display_title === 'severity') {
             display_title = 'Accident Severity';
         } else if (display_title === 'temp_avg') {
-            display_title = 'Temperature Average';
+            display_title = 'Temperature Avg';
         } else if (display_title === 'temp_rng') {
             display_title = 'Temperature Range';
         } else if (display_title === 'humidity') {
