@@ -6,6 +6,7 @@ import TimeSeriesRow from './TimeSeriesRow';
 import '../../Style/TimeSeries.css';
 
 // TODO: predictive stuff for timeseries
+// TODO: room for optimization for table self join for cumulative
 
 class TimeSeries extends Component {
     constructor(props) {
@@ -230,7 +231,7 @@ class TimeSeries extends Component {
 
                     <div class="description">
                     <h4 style = {{marginTop: "10px"}}> Description </h4> 
-                View the raw accident data over time for for a specified city. Accident severity ranges from 1 to 4.
+                View the raw accident data over time for for a specified city. Accident severity ranges from 1 to 4. The x-axis is 12*year+month.
                 <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
                 Select a city to observe.
                 <div style = {{marginTop: '20px'}}></div>
@@ -271,7 +272,7 @@ class TimeSeries extends Component {
 
                     <div class="description">
                     <h4 style = {{marginTop: "10px"}}> Description </h4> 
-                    View accident data over time for for a specified city. Accident severity ranges from 1 to 4.
+                    View accident data over time for for a specified city. Accident severity ranges from 1 to 4. The x-axis is 12*year+month.
                 <h4 style = {{marginTop: "20px"}}> Instructions </h4> 
                 Select a city to observe.
                 <div style = {{marginTop: '20px'}}></div>
