@@ -26,7 +26,10 @@ class TimeSeries extends Component {
         }
 
         this.showFeatures = this.showFeatures.bind(this);
-        this.loadTimeSeries = this.loadTimeSeries.bind(this);
+        this.loadTimeSeriesSeverity = this.loadTimeSeriesSeverity.bind(this);
+        this.loadTimeSeriesAccidents = this.loadTimeSeriesAccidents.bind(this);
+        this.loadTimeSeriesCumSeverity = this.loadTimeSeriesCumSeverity.bind(this);
+        this.loadTimeSeriesCumAccidents = this.loadTimeSeriesCumAccidents.bind(this);
     }
 
     async componentDidMount() {
@@ -50,7 +53,9 @@ class TimeSeries extends Component {
         if (response.data) {
             var featureList = response.data.rows;
             let featureDivs = featureList.map((feature) => <TimeSeriesRow year={feature.YEAR} month={feature.MONTH} id={feature.ID} time={feature.TIME} severity={feature.SEVERITY} accidents={feature.ACCIDENTS} cum_severity={feature.CUM_SEVERITY} cum_accidents={feature.CUM_ACCIDENTS}/>);
-            let datarows = featureList.map((row) => { return { year: row.YEAR, month: row.MONTH, time: row.TIME, severity: row.SEVERITY, accidents: row.ACCIDENTS, cum_severity: row.CUM_SEVERITY, cum_accidents: row.CUM_ACCIDENTS } });
+            let datarows = featureList.map((row) => { 
+                return { year: row.YEAR, month: row.MONTH, time: row.TIME, severity: row.SEVERITY, accidents: row.ACCIDENTS, cum_severity: row.CUM_SEVERITY, cum_accidents: row.CUM_ACCIDENTS } 
+            });
             this.setState({
                 features: featureDivs,
                 data: datarows
@@ -58,11 +63,11 @@ class TimeSeries extends Component {
         }
     }
 
-    loadTimeSeries() {
+    loadTimeSeriesAccidents() {
         if (this.state.data.length === 0) {
             return <div> Loading </div>
         } else {
-            var config = {
+            var configAccidents = {
                 height: 400,
                 title: {
                     visible: true,
@@ -70,7 +75,77 @@ class TimeSeries extends Component {
                 },
                 description: {
                     visible: true,
-                    text: 'Cumulative Average Severity and Number of Accidents Over Time',
+                    text: 'Average Number of Accidents Over Time',
+                },
+                padding: 'auto',
+                forceFit: true,
+                xField: 'time',
+                yField: 'accidents',
+                label: {
+                    visible: true,
+                    type: 'point',
+                },
+                point: {
+                    visible: true,
+                    size: 5,
+                },
+                xAxis: {
+                    tickCount: 10,
+                },
+                data: this.state.data,
+            }
+            return <LineChart {...configAccidents} />
+        }
+    }
+
+    loadTimeSeriesSeverity() {
+        if (this.state.data.length === 0) {
+            return <div> Loading </div>
+        } else {
+            var configSeverity = {
+                height: 400,
+                title: {
+                    visible: true,
+                    text: 'Time Series Graph',
+                },
+                description: {
+                    visible: true,
+                    text: 'Average Severity Over Time',
+                },
+                padding: 'auto',
+                forceFit: true,
+                xField: 'time',
+                yField: 'severity',
+                label: {
+                    visible: false,
+                    type: 'point',
+                },
+                point: {
+                    visible: true,
+                    size: 5,
+                },
+                xAxis: {
+                    tickCount: 10,
+                },
+                data: this.state.data,
+            }
+            return <LineChart {...configSeverity} />
+        }
+    }
+
+    loadTimeSeriesCumAccidents() {
+        if (this.state.data.length === 0) {
+            return <div> Loading </div>
+        } else {
+            var configCumAccidents = {
+                height: 400,
+                title: {
+                    visible: true,
+                    text: 'Time Series Graph',
+                },
+                description: {
+                    visible: true,
+                    text: 'Cumulative Number of Accidents Over Time',
                 },
                 padding: 'auto',
                 forceFit: true,
@@ -89,8 +164,42 @@ class TimeSeries extends Component {
                 },
                 data: this.state.data,
             }
-            console.log(config);
-            return <LineChart {...config} />
+            return <LineChart {...configCumAccidents} />
+        }
+    }
+
+    loadTimeSeriesCumSeverity() {
+        if (this.state.data.length === 0) {
+            return <div> Loading </div>
+        } else {
+            var configCumSeverity = {
+                height: 400,
+                title: {
+                    visible: true,
+                    text: 'Time Series Graph',
+                },
+                description: {
+                    visible: true,
+                    text: 'Cumulative Average Severity Over Time',
+                },
+                padding: 'auto',
+                forceFit: true,
+                xField: 'time',
+                yField: 'cum_severity',
+                label: {
+                    visible: false,
+                    type: 'point',
+                },
+                point: {
+                    visible: true,
+                    size: 5,
+                },
+                xAxis: {
+                    tickCount: 10,
+                },
+                data: this.state.data,
+            }
+            return <LineChart {...configCumSeverity} />
         }
     }
 
@@ -108,7 +217,10 @@ class TimeSeries extends Component {
                     </div>
                 </div>
                 <br></br>
-                {this.loadTimeSeries()}
+                {this.loadTimeSeriesSeverity()}
+                {this.loadTimeSeriesAccidents()}
+                {this.loadTimeSeriesCumSeverity()}
+                {this.loadTimeSeriesCumAccidents()}
                 <br></br>
                 <div className="time-series">
                     <div className="time-series-container">
