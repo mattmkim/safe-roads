@@ -5,7 +5,6 @@ import { LineChart } from '@opd/g2plot-react';
 import TimeSeriesRow from './TimeSeriesRow';
 import '../../Style/TimeSeries.css';
 
-//TODO: fix cumulative
 // TODO: predictive stuff for timeseries
 
 class TimeSeries extends Component {
@@ -64,7 +63,7 @@ class TimeSeries extends Component {
             var configAccidents = {
                 height: 400,
                 title: {
-                    visible: true,
+                    visible: false,
                     text: 'Time Series Graph',
                 },
                 description: {
@@ -99,7 +98,7 @@ class TimeSeries extends Component {
             var configSeverity = {
                 height: 400,
                 title: {
-                    visible: true,
+                    visible: false,
                     text: 'Time Series Graph',
                 },
                 description: {
@@ -134,7 +133,7 @@ class TimeSeries extends Component {
             var configCumAccidents = {
                 height: 400,
                 title: {
-                    visible: true,
+                    visible: false,
                     text: 'Time Series Graph',
                 },
                 description: {
@@ -169,7 +168,7 @@ class TimeSeries extends Component {
             var configCumSeverity = {
                 height: 400,
                 title: {
-                    visible: true,
+                    visible: false,
                     text: 'Time Series Graph',
                 },
                 description: {
@@ -214,7 +213,7 @@ class TimeSeries extends Component {
     
                         <div className="h3">Accident Time Series for U.S. Cities</div>
                             <Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false}/>
-                        <div className="h5">Current city: {this.state.city}</div>
+                        <div className="h5" style = {{marginTop: '10px'}}>Current city: {this.state.city}</div>
                     
     
                 <br></br>
@@ -239,7 +238,7 @@ class TimeSeries extends Component {
 
                         <div className="h3">Accident Time Series for U.S. Cities</div>
                             <Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false}/>
-                        <div className="h5">Current city: {this.state.city}</div>
+                        <div className="h5" style = {{marginTop: '10px'}}>Current city: {this.state.city}</div>
                     
   
                 <br></br>
@@ -281,7 +280,7 @@ class TimeSeries extends Component {
 
                         <div className="h3">Accident Time Series for U.S. Cities</div>
                         <Select value={this.state.city} onChange={(e) => this.showFeatures(e.value)} options={this.state.cities} isMulti={false}/>
-                        <div className="h5">Current city: {this.state.city}</div>
+                        <div className="h5" style = {{marginTop: '10px'}}>Current city: {this.state.city}</div>
                   
        
                 <br></br>

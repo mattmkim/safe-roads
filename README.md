@@ -14,6 +14,7 @@ Add paths (locally or to zshrc/bashrc):
 
 ## Instructions for Running the Web App
 * Step 1: Navigate to the Webapp folder 
+* Step 1.1: Create `.env` file with `ATLAS_URI`
 * Step 2: To run the above 2 commands concurrently (in development only) run `npm run dev`
 * Step 2.1: Navigate to the web folder and run `npm install` and `npm start`
 * Step 2.2: Navigate to the server folder and run `npm install` and `node server.js`
