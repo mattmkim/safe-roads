@@ -2,6 +2,7 @@ const oracledb = require('oracledb');
 
 async function initialization() {
     await oracledb.createPool({
+        poolAlias: 'danieljkim',
         user: 'danieljkim',
         password: '12341234',
         connectionString: '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=saferoads-db.cey57dak54ay.us-east-1.rds.amazonaws.com)(PORT=1521))(CONNECT_DATA=(SID=SFROADDB)))'
@@ -19,7 +20,7 @@ function simpleExecute(statement, binds = [], opts = {}) {
       opts.autoCommit = true;
    
       try {
-        conn = await oracledb.getConnection();
+        conn = await oracledb.getConnection('danieljkim');
 
         const result = await conn.execute(statement, binds, opts);
    
@@ -43,7 +44,7 @@ function simpleExecute(statement, binds = [], opts = {}) {
 module.exports.execute = simpleExecute
 
 async function close() {
-    await oracledb.getPool().close();
+    await oracledb.getPool('danieljkim').close();
   }
    
   module.exports.close = close;
